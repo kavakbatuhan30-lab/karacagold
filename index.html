@@ -735,6 +735,67 @@
     font-size:12px;color:#8a7a5e;letter-spacing:.14em;flex-wrap:wrap;gap:16px;
   }
 
+  /* Kolye gallery ------------------------------------------------------- */
+  .kolye-gallery{background:transparent}
+  .kolye-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+  }
+  @media(max-width:900px){.kolye-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:500px){.kolye-grid{grid-template-columns:1fr 1fr}}
+  .kolye-item{
+    cursor:pointer;border-radius:6px;overflow:hidden;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.4);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), border-color .35s, box-shadow .35s;
+    display:flex;flex-direction:column;
+  }
+  .kolye-item:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 20px 50px -15px rgba(42,29,19,.25)}
+  .kolye-img-wrap{
+    aspect-ratio:3/4;overflow:hidden;background:#1f160e;
+  }
+  .kolye-img-wrap img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform 1s cubic-bezier(.2,.7,.2,1);
+    display:block;
+  }
+  .kolye-item:hover .kolye-img-wrap img{transform:scale(1.07)}
+  .kolye-label{
+    padding:12px 14px;font-size:11px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--bronze-soft);font-weight:500;
+    border-top:1px solid var(--border);
+  }
+
+  /* Lightbox ------------------------------------------------------------ */
+  .lightbox{
+    display:none;position:fixed;inset:0;z-index:500;
+    background:rgba(20,12,6,.92);backdrop-filter:blur(10px);
+    align-items:center;justify-content:center;
+  }
+  .lightbox.open{display:flex}
+  .lightbox img{
+    max-width:min(90vw,820px);max-height:90vh;
+    object-fit:contain;border-radius:4px;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,.7);
+  }
+  .lb-close{
+    position:fixed;top:22px;right:26px;background:none;border:1px solid rgba(255,195,0,.45);
+    color:var(--gold);font-size:20px;width:44px;height:44px;border-radius:50%;
+    cursor:pointer;display:grid;place-items:center;transition:background .25s;
+    z-index:501;
+  }
+  .lb-close:hover{background:var(--gold);color:var(--ink)}
+  .lb-prev,.lb-next{
+    position:fixed;top:50%;transform:translateY(-50%);
+    background:none;border:1px solid rgba(255,195,0,.35);
+    color:var(--gold);font-size:36px;width:52px;height:52px;
+    border-radius:50%;cursor:pointer;display:grid;place-items:center;
+    transition:background .25s;z-index:501;
+  }
+  .lb-prev{left:18px} .lb-next{right:18px}
+  .lb-prev:hover,.lb-next:hover{background:rgba(255,195,0,.18)}
+
   /* Reveal animation ---------------------------------------------------- */
   .reveal{
     opacity:0;transform:translateY(40px);
@@ -776,6 +837,7 @@
   <ul id="navMenu">
     <li><a href="#atelier">Atölye</a></li>
     <li><a href="#collections">Koleksiyonlar</a></li>
+    <li><a href="#kolye">Kolyeler</a></li>
     <li><a href="#craft">Zanaat</a></li>
     <li><a href="#reviews">Yorumlar</a></li>
     <li><a href="#visit">Ziyaret Et</a></li>
@@ -906,6 +968,61 @@
     <div class="grid" id="grid"><!-- populated by JS --></div>
   </div>
 </section>
+
+<!-- KOLYE GALERİSİ ===================================================== -->
+<section id="kolye" class="kolye-gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="tag">02b — Kolye Koleksiyonu</span>
+        <h2>El işi <em>kolye</em><br />modelleri.</h2>
+      </div>
+      <p>22 ayar altın, özgün Anadolu işçiliğiyle buluşuyor. Her model vitrinde sizi bekliyor.</p>
+    </div>
+    <div class="kolye-grid" id="kolyeGrid">
+      <div class="kolye-item reveal" onclick="openLightbox(0)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2162.jpg" alt="Kolye 1" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal d1" onclick="openLightbox(1)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2176.jpg" alt="Kolye 2" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal d2" onclick="openLightbox(2)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2264.jpg" alt="Kolye 3" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal d3" onclick="openLightbox(3)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2268.jpg" alt="Kolye 4" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal" onclick="openLightbox(4)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2272.jpg" alt="Kolye 5" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal d1" onclick="openLightbox(5)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2290.jpg" alt="Kolye 6" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal d2" onclick="openLightbox(6)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2292.jpg" alt="Kolye 7" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+      <div class="kolye-item reveal d3" onclick="openLightbox(7)">
+        <div class="kolye-img-wrap"><img src="imgkolye/IMG_2295.jpg" alt="Kolye 8" loading="lazy" /></div>
+        <span class="kolye-label">22 Ayar Altın Kolye</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX =========================================================== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Kolye görseli" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()" aria-label="Kapat">✕</button>
+  <button class="lb-prev" onclick="event.stopPropagation();shiftLightbox(-1)" aria-label="Önceki">‹</button>
+  <img id="lbImg" src="" alt="" onclick="event.stopPropagation()" />
+  <button class="lb-next" onclick="event.stopPropagation();shiftLightbox(1)" aria-label="Sonraki">›</button>
+</div>
 
 <!-- CRAFT ============================================================== -->
 <section id="craft" class="craft">
@@ -1348,6 +1465,20 @@ counters.forEach(c=>cio.observe(c));
   update();
   setInterval(update, 60000);
 })();
+
+/* Lightbox ============================================================ */
+const kolyeImgs = [
+  'imgkolye/IMG_2162.jpg','imgkolye/IMG_2176.jpg','imgkolye/IMG_2264.jpg',
+  'imgkolye/IMG_2268.jpg','imgkolye/IMG_2272.jpg','imgkolye/IMG_2290.jpg',
+  'imgkolye/IMG_2292.jpg','imgkolye/IMG_2295.jpg'
+];
+let lbIndex = 0;
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+function openLightbox(i){ lbIndex=i; lbImg.src=kolyeImgs[i]; lb.classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLightbox(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+function shiftLightbox(d){ lbIndex=(lbIndex+d+kolyeImgs.length)%kolyeImgs.length; lbImg.src=kolyeImgs[lbIndex]; }
+document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open'))return; if(e.key==='Escape')closeLightbox(); if(e.key==='ArrowLeft')shiftLightbox(-1); if(e.key==='ArrowRight')shiftLightbox(1); });
 
 /* Parallax mandala ==================================================== */
 const mandala = document.querySelector(".mandala");
