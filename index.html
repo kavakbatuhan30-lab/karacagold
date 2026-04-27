@@ -738,6 +738,93 @@
     font-size:12px;color:#8a7a5e;letter-spacing:.14em;flex-wrap:wrap;gap:16px;
   }
 
+  /* Ziynet altın carousel ----------------------------------------------- */
+  .ziynet{background:transparent}
+  .ziynet-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+  }
+  @media(max-width:1100px){.ziynet-grid{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:800px){.ziynet-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){.ziynet-grid{grid-template-columns:1fr}}
+
+  .ziynet-card{
+    position:relative;border-radius:8px;overflow:hidden;
+    border:1px solid var(--border);
+    background:linear-gradient(180deg,#fffaee,#fbf2dc);
+    box-shadow:0 2px 8px -2px rgba(42,29,19,.08);
+    transition:transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .35s;
+    display:flex;flex-direction:column;
+  }
+  .ziynet-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 48px -18px rgba(42,29,19,.28);
+    border-color:var(--gold);
+  }
+
+  .ziynet-stage{
+    aspect-ratio:1/1;position:relative;overflow:hidden;
+    background:radial-gradient(ellipse at 50% 35%, #fffaee 0%, #f0e2bc 100%);
+  }
+  .ziynet-track{
+    display:flex;width:100%;height:100%;
+    scroll-snap-type:x mandatory;
+    overflow-x:auto;overflow-y:hidden;
+    scroll-behavior:smooth;
+    scrollbar-width:none;-ms-overflow-style:none;
+  }
+  .ziynet-track::-webkit-scrollbar{display:none}
+  .ziynet-slide{
+    flex:0 0 100%;height:100%;
+    scroll-snap-align:center;scroll-snap-stop:always;
+    display:grid;place-items:center;padding:14px;
+  }
+  .ziynet-slide img{
+    max-width:100%;max-height:100%;object-fit:contain;
+    filter:drop-shadow(0 16px 22px rgba(160,110,30,.18));
+    transition:transform .8s cubic-bezier(.2,.7,.2,1);
+  }
+  .ziynet-card:hover .ziynet-slide img{transform:scale(1.04)}
+
+  /* Carousel arrows (only visible if multiple slides) */
+  .ziynet-stage[data-multi="true"] .ziy-arrow{display:grid}
+  .ziy-arrow{
+    display:none;position:absolute;top:50%;transform:translateY(-50%);
+    width:34px;height:34px;border-radius:50%;
+    border:1px solid rgba(42,29,19,.18);background:rgba(255,250,238,.92);
+    backdrop-filter:blur(6px);
+    place-items:center;cursor:pointer;color:var(--ink);
+    font-size:18px;line-height:1;
+    opacity:0;transition:opacity .3s, background .25s, border-color .25s;
+    z-index:3;
+  }
+  .ziynet-card:hover .ziy-arrow{opacity:1}
+  .ziy-arrow:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+  .ziy-arrow.prev{left:8px}
+  .ziy-arrow.next{right:8px}
+
+  /* Dots */
+  .ziy-dots{
+    position:absolute;left:0;right:0;bottom:8px;z-index:3;
+    display:flex;gap:6px;justify-content:center;pointer-events:none;
+  }
+  .ziy-dots span{
+    width:6px;height:6px;border-radius:50%;
+    background:rgba(42,29,19,.22);transition:width .3s, background .3s;
+  }
+  .ziy-dots span.on{background:var(--gold);width:18px;border-radius:3px}
+
+  .ziynet-info{
+    padding:14px 16px 16px;border-top:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+  }
+  .ziynet-info .nm{
+    font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);
+  }
+  .ziynet-info .meta{
+    font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--bronze-soft);
+  }
+
   /* Kolye gallery ------------------------------------------------------- */
   .kolye-gallery{background:transparent}
   .kolye-grid{
@@ -939,6 +1026,7 @@
     <li><a href="#bilezik">Bilezikler</a></li>
     <li><a href="#kolye">Kolyeler</a></li>
     <li><a href="#yuzuk">Yüzük & Küpe</a></li>
+    <li><a href="#ziynet">Ziynet</a></li>
     <li><a href="#craft">Zanaat</a></li>
     <li><a href="#reviews">Yorumlar</a></li>
     <li><a href="#visit">Ziyaret Et</a></li>
@@ -1111,6 +1199,20 @@
   </div>
 </section>
 
+<!-- ZİYNET ALTINLARI =================================================== -->
+<section id="ziynet" class="ziynet">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="tag">02d — Ziynet Altınları</span>
+        <h2>Klasik <em>ziynet</em><br />altın paraları.</h2>
+      </div>
+      <p>Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası ve Gremse — günlük borsadan bağımsız, sertifikalı orijinal Cumhuriyet altınları.</p>
+    </div>
+    <div class="ziynet-grid" id="ziynetGrid"><!-- populated by JS --></div>
+  </div>
+</section>
+
 <!-- LIGHTBOX =========================================================== -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galeri görseli" onclick="closeLightbox()">
   <button class="lb-close" onclick="closeLightbox()" aria-label="Kapat">✕</button>
@@ -1277,6 +1379,7 @@
         <li><a href="#bilezik">Bilezikler</a></li>
         <li><a href="#kolye">Kolyeler</a></li>
         <li><a href="#yuzuk">Yüzük & Küpe</a></li>
+        <li><a href="#ziynet">Ziynet Altınları</a></li>
         <li><a href="#craft">Süreç</a></li>
         <li><a href="#reviews">Yorumlar</a></li>
       </ul>
@@ -1609,6 +1712,110 @@ function renderGallery(targetId, items, opener){
 renderGallery('bilezikGrid', bilezikItems, 'openBilezikLightbox');
 renderGallery('kolyeGrid',   kolyeItems,   'openLightbox');
 renderGallery('yuzukGrid',   yuzukItems,   'openYuzukLightbox');
+
+/* Ziynet altın carousel ===============================================
+   Her kart 1+ foto. Kullanıcı kaydırabilir, oklarla geçebilir, otomatik döner. */
+const ziynetItems = [
+  {label:"Tam Altın",        meta:"22 Ayar",  imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
+  {label:"Yarım Altın",      meta:"22 Ayar",  imgs:["ziynet/yarim.avif","ziynet/yarim1.avif","ziynet/yarim2.avif"]},
+  {label:"Çeyrek Altın",     meta:"22 Ayar",  imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
+  {label:"Reşat 2,5 Altın",  meta:"22 Ayar",  imgs:["ziynet/resat25.avif","ziynet/resat25_1.avif","ziynet/resat25_2.avif"]},
+  {label:"Reşat Tam Altın",  meta:"22 Ayar",  imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
+  {label:"Gremse Altını",    meta:"22 Ayar",  imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
+  {label:"Ata Lirası",       meta:"22 Ayar",  imgs:["ziynet/atalira.avif"]},
+  {label:"5'i Bir Yerde",    meta:"22 Ayar",  imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
+];
+
+(function renderZiynet(){
+  const root = document.getElementById('ziynetGrid');
+  if(!root) return;
+
+  root.innerHTML = ziynetItems.map((it,i)=>{
+    const multi = it.imgs.length > 1;
+    const reveal = i%4===0 ? "reveal" : "reveal d"+(i%4);
+    const slides = it.imgs.map(src =>
+      `<div class="ziynet-slide"><img src="${src}" alt="${it.label}" loading="lazy" /></div>`
+    ).join('');
+    const dots = multi ? `<div class="ziy-dots">${it.imgs.map((_,j)=>`<span class="${j===0?'on':''}"></span>`).join('')}</div>` : '';
+    const arrows = multi ? `
+      <button class="ziy-arrow prev" aria-label="Önceki" type="button">‹</button>
+      <button class="ziy-arrow next" aria-label="Sonraki" type="button">›</button>
+    ` : '';
+    return `<article class="ziynet-card ${reveal}">
+      <div class="ziynet-stage" data-multi="${multi}">
+        <div class="ziynet-track">${slides}</div>
+        ${arrows}${dots}
+      </div>
+      <div class="ziynet-info">
+        <span class="nm">${it.label}</span>
+        <span class="meta">${it.meta}</span>
+      </div>
+    </article>`;
+  }).join('');
+
+  // Yeni .reveal kayıtları
+  if (typeof io !== 'undefined') {
+    root.querySelectorAll('.reveal').forEach(node => io.observe(node));
+  }
+
+  // Carousel davranışı
+  root.querySelectorAll('.ziynet-stage[data-multi="true"]').forEach(stage => {
+    const track = stage.querySelector('.ziynet-track');
+    const dots  = stage.querySelectorAll('.ziy-dots span');
+    const prev  = stage.querySelector('.ziy-arrow.prev');
+    const next  = stage.querySelector('.ziy-arrow.next');
+    const slides = stage.querySelectorAll('.ziynet-slide');
+    const total = slides.length;
+    let idx = 0;
+    let timer = null;
+    let isHover = false;
+
+    function go(i, smooth=true){
+      idx = (i + total) % total;
+      track.scrollTo({left: idx * track.clientWidth, behavior: smooth ? 'smooth' : 'auto'});
+      dots.forEach((d,j)=>d.classList.toggle('on', j===idx));
+    }
+    function startAuto(){
+      stopAuto();
+      timer = setInterval(()=>{ if(!isHover) go(idx+1); }, 3500);
+    }
+    function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+
+    prev.addEventListener('click', e=>{ e.stopPropagation(); go(idx-1); });
+    next.addEventListener('click', e=>{ e.stopPropagation(); go(idx+1); });
+
+    // Manuel scroll/swipe — track scroll ile dot senkronu
+    let scrollTimeout;
+    track.addEventListener('scroll', ()=>{
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(()=>{
+        const newIdx = Math.round(track.scrollLeft / track.clientWidth);
+        if (newIdx !== idx){
+          idx = newIdx;
+          dots.forEach((d,j)=>d.classList.toggle('on', j===idx));
+        }
+      }, 80);
+    });
+
+    // Hover'da otomatiği duraklat
+    stage.addEventListener('mouseenter', ()=> isHover=true);
+    stage.addEventListener('mouseleave', ()=> isHover=false);
+    // Touch ile etkileşim olduğunda kısaca durdur
+    track.addEventListener('touchstart', ()=>{ isHover=true; }, {passive:true});
+    track.addEventListener('touchend',   ()=>{ setTimeout(()=>isHover=false, 1500); }, {passive:true});
+
+    // Resize'da pozisyonu koru
+    window.addEventListener('resize', ()=> go(idx, false));
+
+    // Auto-rotate görünür olunca başlasın
+    const aIo = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) startAuto(); else stopAuto();
+      });
+    },{threshold:.25});
+    aIo.observe(stage);
+  });
+})();
 
 /* Lightbox ============================================================ */
 const kolyeImgs   = kolyeItems.map(x=>x.img);

@@ -13,7 +13,8 @@ karacagold/
 ├── karacashowroom.jpg/png  # Atölye fotoğrafı
 ├── imgkaraca/              # Set ürün fotoğrafları (4 set + 5 bilezik)
 ├── imgkolye/               # Kolye galerisi (8 model)
-└── yuzukvebilezik/         # Yüzük + küpe + ek bilezikler
+├── yuzukvebilezik/         # Yüzük + küpe + ek bilezikler
+└── ziynet/                 # Ziynet altın paraları (Tam, Yarım, Çeyrek, Reşat, Ata, Gremse)
 ```
 
 ## Bölümler
@@ -25,6 +26,7 @@ karacagold/
 | `#bilezik` | Bilezikler | 12 model |
 | `#kolye` | Kolyeler | 8 model |
 | `#yuzuk` | Yüzük & Küpe | 3 model |
+| `#ziynet` | Ziynet Altınları | 8 tip — carousel'li kartlar |
 | `#craft` | Süreç | 4 adımlı ziyaret deneyimi |
 | `#reviews` | Yorumlar | Google 5★ yorumları |
 | `#visit` | Ziyaret | Harita + saatler + iletişim |
@@ -38,6 +40,14 @@ karacagold/
 
 **Yeni set kartı eklemek:**
 - `index.html` içinde `const products = [...]` dizisine yeni nesne ekle: `{n, t, p, c, img}`
+
+**Ziynet altın eklemek (1 veya çoklu foto):**
+- Görselleri `ziynet/` klasörüne koy
+- `const ziynetItems = [...]` dizisine satır ekle:
+  ```js
+  {label:"Yeni Altın", meta:"22 Ayar", imgs:["ziynet/foto1.avif","ziynet/foto2.avif"]}
+  ```
+- `imgs` dizisinde 2+ foto varsa otomatik carousel açılır (oklar + dots + auto-rotate)
 
 ## Yerelde çalıştırma
 
