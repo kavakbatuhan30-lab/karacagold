@@ -1747,17 +1747,16 @@ renderGallery('yuzukGrid',   yuzukItems,   'openYuzukLightbox');
 /* Ziynet altın carousel ===============================================
    Her kart 1+ foto. Kullanıcı kaydırabilir, oklarla geçebilir, otomatik döner. */
 /* zoom: kart içindeki paranın görsel çapını eşitlemek için her altına özel ölçek.
-   pendant'lı fotolar için >1 (yakınlaştır), yakın çekim coin'ler için <1 (uzaklaştır).
-   offy: dikey kaydırma (- yukarı, + aşağı) — paranın merkeze gelmesi için. */
+   Hepsi yaklaşık aynı boyutta görünmeli, kart içinde ferah dursun. */
 const ziynetItems = [
-  {label:"Tam Altın",        meta:"22 Ayar",  zoom:1.55, offy:"-4%",  imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
-  {label:"Yarım Altın",      meta:"22 Ayar",  zoom:1.55, offy:"-4%",  imgs:["ziynet/yarim.avif","ziynet/yarim1.avif","ziynet/yarim2.avif"]},
-  {label:"Çeyrek Altın",     meta:"22 Ayar",  zoom:1.85, offy:"-3%",  imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
-  {label:"Reşat 2,5 Altın",  meta:"22 Ayar",  zoom:0.85, offy:"0",    imgs:["ziynet/resat25.avif","ziynet/resat25_1.avif","ziynet/resat25_2.avif"]},
-  {label:"Reşat Tam Altın",  meta:"22 Ayar",  zoom:1.7,  offy:"-3%",  imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
-  {label:"Gremse Altını",    meta:"22 Ayar",  zoom:1.3,  offy:"-3%",  imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
-  {label:"Ata Lirası",       meta:"22 Ayar",  zoom:0.78, offy:"0",    imgs:["ziynet/atalira.avif"]},
-  {label:"5'i Bir Yerde",    meta:"22 Ayar",  zoom:0.78, offy:"0",    imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
+  {label:"Tam Altın",        meta:"22 Ayar",  zoom:0.78, imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
+  {label:"Yarım Altın",      meta:"22 Ayar",  zoom:0.78, imgs:["ziynet/yarim.avif","ziynet/yarim1.avif","ziynet/yarim2.avif"]},
+  {label:"Çeyrek Altın",     meta:"22 Ayar",  zoom:0.92, imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
+  {label:"Reşat 2,5 Altın",  meta:"22 Ayar",  zoom:0.55, imgs:["ziynet/resat25.avif","ziynet/resat25_1.avif","ziynet/resat25_2.avif"]},
+  {label:"Reşat Tam Altın",  meta:"22 Ayar",  zoom:0.82, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
+  {label:"Gremse Altını",    meta:"22 Ayar",  zoom:0.78, imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
+  {label:"Ata Lirası",       meta:"22 Ayar",  zoom:0.55, imgs:["ziynet/atalira.avif"]},
+  {label:"5'i Bir Yerde",    meta:"22 Ayar",  zoom:0.55, imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
 ];
 
 /* Külçe altın — ortak arka yüz */
