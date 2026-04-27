@@ -14,7 +14,8 @@ karacagold/
 ├── imgkaraca/              # Set ürün fotoğrafları (4 set + 5 bilezik)
 ├── imgkolye/               # Kolye galerisi (8 model)
 ├── yuzukvebilezik/         # Yüzük + küpe + ek bilezikler
-└── ziynet/                 # Ziynet altın paraları (Tam, Yarım, Çeyrek, Reşat, Ata, Gremse)
+├── ziynet/                 # Ziynet altın paraları (Tam, Yarım, Çeyrek, Reşat, Ata, Gremse)
+└── kulce/                  # Külçe altınlar (5g–100g) + ortak arka yüz
 ```
 
 ## Bölümler
@@ -27,6 +28,7 @@ karacagold/
 | `#kolye` | Kolyeler | 8 model |
 | `#yuzuk` | Yüzük & Küpe | 3 model |
 | `#ziynet` | Ziynet Altınları | 8 tip — carousel'li kartlar |
+| `#kulce` | Külçe Altın | 5 ağırlık (5g–100g) — ön/arka carousel |
 | `#craft` | Süreç | 4 adımlı ziyaret deneyimi |
 | `#reviews` | Yorumlar | Google 5★ yorumları |
 | `#visit` | Ziyaret | Harita + saatler + iletişim |
@@ -48,6 +50,14 @@ karacagold/
   {label:"Yeni Altın", meta:"22 Ayar", imgs:["ziynet/foto1.avif","ziynet/foto2.avif"]}
   ```
 - `imgs` dizisinde 2+ foto varsa otomatik carousel açılır (oklar + dots + auto-rotate)
+
+**Külçe altın eklemek:**
+- Görseli `kulce/` klasörüne koy (örn. `200gram.webp`)
+- `const kulceItems = [...]` dizisine ekle:
+  ```js
+  {label:"200 Gram Külçe", meta:"999.9 · Metalor", imgs:["kulce/200gram.webp", kulceArka]}
+  ```
+- `kulceArka` ortak arka yüzü gösterir, her külçeye otomatik eklenir
 
 ## Yerelde çalıştırma
 

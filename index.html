@@ -1027,6 +1027,7 @@
     <li><a href="#kolye">Kolyeler</a></li>
     <li><a href="#yuzuk">Yüzük & Küpe</a></li>
     <li><a href="#ziynet">Ziynet</a></li>
+    <li><a href="#kulce">Külçe</a></li>
     <li><a href="#craft">Zanaat</a></li>
     <li><a href="#reviews">Yorumlar</a></li>
     <li><a href="#visit">Ziyaret Et</a></li>
@@ -1213,6 +1214,20 @@
   </div>
 </section>
 
+<!-- KÜLÇE ALTIN ======================================================== -->
+<section id="kulce" class="ziynet">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="tag">02e — Külçe Altın</span>
+        <h2>Sertifikalı <em>külçe</em><br />altın.</h2>
+      </div>
+      <p>Metalor 999.9 saflıkta, sertifikalı külçe altınlar. 5 gramdan 100 grama kadar — her külçenin ön ve arka yüzü kart üzerinde gösterilir.</p>
+    </div>
+    <div class="ziynet-grid" id="kulceGrid"><!-- populated by JS --></div>
+  </div>
+</section>
+
 <!-- LIGHTBOX =========================================================== -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Galeri görseli" onclick="closeLightbox()">
   <button class="lb-close" onclick="closeLightbox()" aria-label="Kapat">✕</button>
@@ -1380,6 +1395,7 @@
         <li><a href="#kolye">Kolyeler</a></li>
         <li><a href="#yuzuk">Yüzük & Küpe</a></li>
         <li><a href="#ziynet">Ziynet Altınları</a></li>
+        <li><a href="#kulce">Külçe Altın</a></li>
         <li><a href="#craft">Süreç</a></li>
         <li><a href="#reviews">Yorumlar</a></li>
       </ul>
@@ -1726,11 +1742,22 @@ const ziynetItems = [
   {label:"5'i Bir Yerde",    meta:"22 Ayar",  imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
 ];
 
-(function renderZiynet(){
-  const root = document.getElementById('ziynetGrid');
+/* Külçe altın — ortak arka yüz */
+const kulceArka = "kulce/arkakismi.webp";
+const kulceItems = [
+  {label:"5 Gram Külçe",   meta:"999.9 · Metalor", imgs:["kulce/5gram.webp",   kulceArka]},
+  {label:"10 Gram Külçe",  meta:"999.9 · Metalor", imgs:["kulce/10gram.webp",  kulceArka]},
+  {label:"20 Gram Külçe",  meta:"999.9 · Metalor", imgs:["kulce/20gram.webp",  kulceArka]},
+  {label:"50 Gram Külçe",  meta:"999.9 · Metalor", imgs:["kulce/50gram.webp",  kulceArka]},
+  {label:"100 Gram Külçe", meta:"999.9 · Metalor", imgs:["kulce/100gram.webp", kulceArka]},
+];
+
+/* Carousel'li kart bölümü oluştur (ziynet + külçe için ortak) */
+function renderCarouselSection(rootId, items){
+  const root = document.getElementById(rootId);
   if(!root) return;
 
-  root.innerHTML = ziynetItems.map((it,i)=>{
+  root.innerHTML = items.map((it,i)=>{
     const multi = it.imgs.length > 1;
     const reveal = i%4===0 ? "reveal" : "reveal d"+(i%4);
     const slides = it.imgs.map(src =>
@@ -1815,7 +1842,10 @@ const ziynetItems = [
     },{threshold:.25});
     aIo.observe(stage);
   });
-})();
+}
+
+renderCarouselSection('ziynetGrid', ziynetItems);
+renderCarouselSection('kulceGrid',  kulceItems);
 
 /* Lightbox ============================================================ */
 const kolyeImgs   = kolyeItems.map(x=>x.img);
