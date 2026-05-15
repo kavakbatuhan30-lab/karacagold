@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="fr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -87,6 +87,24 @@
     display:inline-flex;align-items:center;
   }
   nav .cta:hover{background:var(--ink);color:var(--gold)}
+
+  /* Language switcher --------------------------------------------------- */
+  .lang-switch{
+    display:flex;align-items:center;gap:2px;
+    margin-left:14px;margin-right:6px;
+    padding:4px;border:1px solid var(--border);border-radius:999px;
+    background:rgba(255,255,255,.35);backdrop-filter:blur(6px);
+  }
+  .lang-switch button{
+    background:transparent;border:0;cursor:pointer;
+    font-family:var(--sans);font-size:11px;font-weight:600;
+    letter-spacing:.14em;color:var(--ink);text-transform:uppercase;
+    padding:6px 10px;border-radius:999px;
+    transition:background .25s ease,color .25s ease;
+  }
+  .lang-switch button:hover{color:var(--gold)}
+  .lang-switch button.on{background:var(--ink);color:var(--gold)}
+
   .burger{
     display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;
     padding:6px;z-index:101;
@@ -122,6 +140,8 @@
     }
     .burger{display:flex}
     nav .cta{display:none}
+    .lang-switch{margin-left:auto;margin-right:14px;padding:3px}
+    .lang-switch button{padding:5px 8px;font-size:10px;letter-spacing:.12em}
   }
 
   /* Hero ---------------------------------------------------------------- */
@@ -554,6 +574,81 @@
     transition:all .4s ease;
   }
   .step:hover .icon{transform:rotate(-15deg);background:var(--gold);color:var(--green)}
+
+  /* Tester — altın test cihazı bölümü */
+  .tester-grid{
+    display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center;
+    margin-top:8px;
+  }
+  @media (max-width:900px){.tester-grid{grid-template-columns:1fr;gap:40px}}
+
+  .tester-photo{
+    position:relative;
+    aspect-ratio: 5/4;
+    display:grid;place-items:center;
+    isolation:isolate;
+  }
+  /* Yumuşak altın halo — arkadan ışık veriyor */
+  .tester-photo::before{
+    content:"";position:absolute;inset:8% 12%;
+    background:radial-gradient(ellipse at center, rgba(212,175,90,.35), rgba(212,175,90,0) 65%);
+    filter:blur(28px);
+    z-index:0;
+  }
+  /* İnce altın çizgi çerçeve (köşelerde aksent) */
+  .tester-photo::after{
+    content:"";position:absolute;inset:0;
+    border:1px solid rgba(212,175,90,.35);
+    border-radius:4px;
+    z-index:2;pointer-events:none;
+  }
+  .tester-photo .frame{
+    position:absolute;inset:14px;
+    background:linear-gradient(180deg,#ffffff 0%,#f6efe2 100%);
+    border-radius:3px;
+    box-shadow:
+      0 30px 60px -20px rgba(0,0,0,.55),
+      0 10px 25px -10px rgba(0,0,0,.35),
+      inset 0 1px 0 rgba(255,255,255,.6);
+    z-index:1;
+  }
+  .tester-photo img{
+    position:relative;z-index:1;
+    width:88%;height:88%;
+    object-fit:contain;
+    filter:drop-shadow(0 18px 22px rgba(0,0,0,.28));
+  }
+  /* Köşe aksanları */
+  .tester-photo .corner{
+    position:absolute;width:18px;height:18px;border:1px solid var(--gold);z-index:3;
+  }
+  .tester-photo .corner.tl{top:-1px;left:-1px;border-right:none;border-bottom:none}
+  .tester-photo .corner.tr{top:-1px;right:-1px;border-left:none;border-bottom:none}
+  .tester-photo .corner.bl{bottom:-1px;left:-1px;border-right:none;border-top:none}
+  .tester-photo .corner.br{bottom:-1px;right:-1px;border-left:none;border-top:none}
+
+  .tester-copy h3{
+    font-family:var(--serif);font-weight:400;font-size:34px;line-height:1.18;
+    color:var(--cream);margin-bottom:22px;letter-spacing:-.005em;
+  }
+  .tester-copy h3 em{color:var(--gold);font-style:italic}
+  .tester-copy p{color:#d9e2db;font-size:15.5px;line-height:1.8;margin-bottom:14px}
+  .tester-copy .pill{
+    display:inline-block;font-family:var(--serif);font-size:11px;letter-spacing:.3em;
+    color:var(--gold);border:1px solid var(--gold);padding:7px 16px;border-radius:999px;
+    margin-bottom:22px;text-transform:uppercase;
+  }
+  .tester-specs{
+    display:flex;gap:28px;flex-wrap:wrap;
+    margin-top:24px;padding-top:22px;
+    border-top:1px solid rgba(245,234,210,.12);
+  }
+  .tester-specs .spec{display:flex;flex-direction:column;gap:4px}
+  .tester-specs .spec .k{
+    font-family:var(--serif);font-size:11px;letter-spacing:.22em;
+    color:var(--gold);text-transform:uppercase;
+  }
+  .tester-specs .spec .v{color:var(--cream);font-size:14px}
 
   /* Reviews ------------------------------------------------------------- */
   .reviews{background:transparent}
@@ -1036,43 +1131,49 @@
     Karaca Gold
   </a>
   <ul id="navMenu">
-    <li><a href="#atelier">Atölye</a></li>
-    <li><a href="#collections">Koleksiyonlar</a></li>
-    <li><a href="#bilezik">Bilezikler</a></li>
-    <li><a href="#kolye">Kolyeler</a></li>
-    <li><a href="#yuzuk">Yüzük & Küpe</a></li>
-    <li><a href="#ziynet">Ziynet</a></li>
-    <li><a href="#kulce">Külçe</a></li>
-    <li><a href="#craft">Zanaat</a></li>
-    <li><a href="#reviews">Yorumlar</a></li>
-    <li><a href="#visit">Ziyaret Et</a></li>
-    <li><a href="tel:+32486647907" class="mobile-cta">Atölyeyi Arayın</a></li>
+    <li><a href="#atelier" data-i18n="nav.atelier">Atelier</a></li>
+    <li><a href="#collections" data-i18n="nav.collections">Collections</a></li>
+    <li><a href="#bilezik" data-i18n="nav.bracelets">Bracelets</a></li>
+    <li><a href="#kolye" data-i18n="nav.necklaces">Colliers</a></li>
+    <li><a href="#yuzuk" data-i18n="nav.rings">Bagues & Boucles</a></li>
+    <li><a href="#ziynet" data-i18n="nav.ziynet">Pièces d'or</a></li>
+    <li><a href="#kulce" data-i18n="nav.bars">Lingots</a></li>
+    <li><a href="#craft" data-i18n="nav.craft">Garantie</a></li>
+    <li><a href="#reviews" data-i18n="nav.reviews">Avis</a></li>
+    <li><a href="#visit" data-i18n="nav.visit">Visite</a></li>
+    <li><a href="tel:+32486647907" class="mobile-cta" data-i18n="nav.callCta">Appeler la boutique</a></li>
   </ul>
-  <a class="cta" href="tel:+32486647907">Atölyeyi Arayın</a>
-  <button class="burger" id="burger" aria-label="Menüyü aç" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+  <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+    <button type="button" data-lang="fr">FR</button>
+    <button type="button" data-lang="tr">TR</button>
+    <button type="button" data-lang="nl">NL</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
+  <a class="cta" href="tel:+32486647907" data-i18n="nav.callCta">Appeler la boutique</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- HERO =============================================================== -->
 <header class="hero">
   <img src="logo.png" alt="" class="mandala" aria-hidden="true" />
   <div class="hero-inner">
-    <div class="eyebrow">Brüksel · Schaerbeek</div>
+    <div class="eyebrow" data-i18n="hero.eyebrow">Bruxelles · Schaerbeek</div>
     <h1>
-      <span class="line"><span>Sakin bir vitrin,</span></span>
-      <span class="line"><span>sertifikalı <em>altın</em>.</span></span>
+      <span class="line"><span data-i18n="hero.line1">Une vitrine sereine,</span></span>
+      <span class="line"><span data-i18n="hero.line2">de l'<em>or</em> certifié.</span></span>
     </h1>
-    <p class="lede">
-      Brüksel Schaerbeek'te, klasik Anadolu setlerini — Kaburga, Trabzon
-      Hasırı, Tuğralı — acelesi olmayan bir vitrinde, 22 ayar sertifikalı
-      olarak sunuyoruz.
+    <p class="lede" data-i18n="hero.lede">
+      À Bruxelles Schaerbeek, nous présentons les parures anatoliennes classiques —
+      Kaburga, Trabzon Hasırı, Tuğralı — en or 22 carats certifié, dans une boutique
+      sans aucune pression.
     </p>
     <div class="hero-cta">
-      <a href="#collections" class="btn">Koleksiyonları Keşfedin <span class="arrow">→</span></a>
-      <a href="#visit" class="btn ghost">Showroom'u ziyaret edin</a>
+      <a href="#collections" class="btn"><span data-i18n="hero.ctaPrimary">Découvrir les collections</span> <span class="arrow">→</span></a>
+      <a href="#visit" class="btn ghost" data-i18n="hero.ctaGhost">Visiter le showroom</a>
     </div>
   </div>
   <div class="scroll-ind">
-    Kaydır
+    <span data-i18n="hero.scroll">Faire défiler</span>
     <span class="bar"></span>
   </div>
 </header>
@@ -1116,39 +1217,38 @@
   <div class="container">
     <div class="section-head reveal" style="grid-template-columns:1fr">
       <div>
-        <span class="tag">01 — Hakkımızda</span>
-        <h2>Schaerbeek'te<br />Anadolu <em>altını</em>.</h2>
+        <span class="tag" data-i18n="atelier.tag">01 — À propos</span>
+        <h2 data-i18n="atelier.title">L'<em>or</em> anatolien,<br />à Schaerbeek.</h2>
       </div>
     </div>
     <div class="atelier-grid">
       <div class="atelier-visual reveal">
-        <img src="karacashowroom.jpg" alt="Karaca Gold Brüksel showroom'u" class="showroom" />
+        <img src="karacashowroom.jpg" alt="Karaca Gold — showroom de Bruxelles" class="showroom" />
         <span class="corner tl"></span>
         <span class="corner tr"></span>
         <span class="corner bl"></span>
         <span class="corner br"></span>
         <div class="caption">
-          <span class="sub">Brüksel · Avenue Rogier 215</span>
-          <span class="title">Showroom — Karaca Gold</span>
+          <span class="sub" data-i18n="atelier.capSub">Bruxelles · Avenue Rogier 215</span>
+          <span class="title" data-i18n="atelier.capTitle">Showroom — Karaca Gold</span>
         </div>
       </div>
       <div class="atelier-copy reveal d1">
-        <h3>Tek bir standart:<br />22 ayar, sertifikalı.</h3>
-        <p>
-          Vitrindeki her parça 22 ayar garantilidir ve resmi sertifika
-          ile teslim edilir. Alaşım, ağırlık ve saflık kutunun içinde
-          açıkça yazılı — tahmin etmek zorunda kalmazsınız.
+        <h3 data-i18n="atelier.h3">Un seul standard :<br />22 carats, certifié.</h3>
+        <p data-i18n="atelier.p1">
+          Chaque pièce en vitrine est garantie 22 carats et livrée avec son certificat
+          officiel. Alliage, poids et pureté sont inscrits clairement dans la boîte —
+          aucune supposition.
         </p>
-        <p>
-          Avenue Rogier'deki showroom'umuzda acele yoktur. Kahve ya da
-          Türk çayı ikram eder, modelleri tek tek anlatır, sorduğunuz
-          her şeyi yanıtlarız. Baskı yok — yalnızca sohbet ve sakin
-          bir seçim.
+        <p data-i18n="atelier.p2">
+          Dans notre showroom de l'Avenue Rogier, pas de précipitation. Café ou thé
+          turc, présentation modèle par modèle, réponses à toutes vos questions.
+          Aucune pression — juste un échange et un choix tranquille.
         </p>
         <div class="stats">
-          <div><span class="n"><em>22</em>K</span><span class="l">Minimum saflık</span></div>
-          <div><span class="n">5.0<em>★</em></span><span class="l">Google puanı</span></div>
-          <div><span class="n" data-count="27">0</span><span class="l">Vitrindeki model</span></div>
+          <div><span class="n"><em>22</em>K</span><span class="l" data-i18n="atelier.statPurity">Pureté minimale</span></div>
+          <div><span class="n">5.0<em>★</em></span><span class="l" data-i18n="atelier.statScore">Note Google</span></div>
+          <div><span class="n" data-count="27">0</span><span class="l" data-i18n="atelier.statModels">Modèles en vitrine</span></div>
         </div>
       </div>
     </div>
@@ -1160,12 +1260,12 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">02 — Setler</span>
-        <h2>Tam setler.<br />Klasik <em>imza</em>.</h2>
+        <span class="tag" data-i18n="collections.tag">02 — Parures</span>
+        <h2 data-i18n="collections.title">Parures complètes.<br />Signature <em>classique</em>.</h2>
       </div>
-      <p>
-        Bilezik, kolye, yüzük ve küpenin uyumlu olduğu klasik 4 parça setler.
-        Bilezik, kolye ve yüzük modellerini ayrı bölümlerde de inceleyebilirsiniz.
+      <p data-i18n="collections.p">
+        Parures classiques en 4 pièces — bracelet, collier, bague et boucles
+        d'oreilles assortis. Vous pouvez aussi parcourir chaque catégorie séparément.
       </p>
     </div>
 
@@ -1178,10 +1278,10 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">02a — Bilezik Koleksiyonu</span>
-        <h2>El işi <em>bilezik</em><br />modelleri.</h2>
+        <span class="tag" data-i18n="bilezik.tag">02a — Collection de bracelets</span>
+        <h2 data-i18n="bilezik.title"><em>Bracelets</em><br />faits main.</h2>
       </div>
-      <p>22 ayar altın, klasik Anadolu motifleriyle. Her model vitrinde sizi bekliyor.</p>
+      <p data-i18n="bilezik.p">Or 22 carats et motifs anatoliens classiques. Chaque modèle vous attend en vitrine.</p>
     </div>
     <div class="kolye-grid" id="bilezikGrid"><!-- populated by JS --></div>
   </div>
@@ -1192,10 +1292,10 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">02b — Kolye Koleksiyonu</span>
-        <h2>El işi <em>kolye</em><br />modelleri.</h2>
+        <span class="tag" data-i18n="kolye.tag">02b — Collection de colliers</span>
+        <h2 data-i18n="kolye.title"><em>Colliers</em><br />faits main.</h2>
       </div>
-      <p>22 ayar altın, özgün Anadolu işçiliğiyle buluşuyor. Her model vitrinde sizi bekliyor.</p>
+      <p data-i18n="kolye.p">L'or 22 carats rencontre le savoir-faire anatolien. Chaque modèle vous attend en vitrine.</p>
     </div>
     <div class="kolye-grid" id="kolyeGrid"><!-- populated by JS --></div>
   </div>
@@ -1206,10 +1306,10 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">02c — Yüzük & Küpe</span>
-        <h2>El işi <em>yüzük</em><br />ve küpeler.</h2>
+        <span class="tag" data-i18n="yuzuk.tag">02c — Bagues & Boucles d'oreilles</span>
+        <h2 data-i18n="yuzuk.title"><em>Bagues</em> et boucles<br />faits main.</h2>
       </div>
-      <p>22 ayar altın, ince işçilik. Vitrindeki tüm modeller şahsen denenebilir.</p>
+      <p data-i18n="yuzuk.p">Or 22 carats, finition soignée. Tous les modèles peuvent être essayés en boutique.</p>
     </div>
     <div class="kolye-grid" id="yuzukGrid"><!-- populated by JS --></div>
   </div>
@@ -1220,10 +1320,10 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">02d — Ziynet Altınları</span>
-        <h2>Klasik <em>ziynet</em><br />altın paraları.</h2>
+        <span class="tag" data-i18n="ziynet.tag">02d — Pièces d'or</span>
+        <h2 data-i18n="ziynet.title">Pièces d'or<br /><em>classiques</em>.</h2>
       </div>
-      <p>Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası ve Gremse — günlük borsadan bağımsız, sertifikalı orijinal Cumhuriyet altınları.</p>
+      <p data-i18n="ziynet.p">Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası et Gremse — pièces de la République turque, originales et certifiées, indépendantes du cours quotidien.</p>
     </div>
     <div class="ziynet-grid" id="ziynetGrid"><!-- populated by JS --></div>
   </div>
@@ -1234,10 +1334,10 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">02e — Külçe Altın</span>
-        <h2>Sertifikalı <em>külçe</em><br />altın.</h2>
+        <span class="tag" data-i18n="kulce.tag">02e — Lingots d'or</span>
+        <h2 data-i18n="kulce.title"><em>Lingots</em> d'or<br />certifiés.</h2>
       </div>
-      <p>Metalor 999.9 saflıkta, sertifikalı külçe altınlar. 5 gramdan 100 grama kadar — her külçenin ön ve arka yüzü kart üzerinde gösterilir.</p>
+      <p data-i18n="kulce.p">Lingots Metalor pureté 999.9, certifiés. De 5 grammes à 100 grammes — le recto et le verso de chaque lingot sont visibles sur la carte.</p>
     </div>
     <div class="ziynet-grid fit-contain" id="kulceGrid"><!-- populated by JS --></div>
   </div>
@@ -1256,44 +1356,38 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">03 — Ziyaret Deneyimi</span>
-        <h2>Karşılamadan <em>teslime</em>.</h2>
+        <span class="tag" data-i18n="craft.tag">03 — Garantie</span>
+        <h2 data-i18n="craft.title">Chaque pièce est <em>testée</em>.</h2>
       </div>
-      <p>
-        Dört sakin adım. Acele yok, satış baskısı yok — yalnızca
-        müşterisine vakit ayıran bir vitrin.
+      <p data-i18n="craft.p">
+        Chaque or de notre showroom est contrôlé avec le testeur dernière
+        génération GoldMax. Carats, pureté et grammage — tout sous vos yeux.
       </p>
     </div>
-    <div class="steps">
-      <div class="step reveal">
-        <span class="num">01</span>
-        <span class="icon">☕</span>
-        <h4>Karşılama</h4>
-        <p>Kapıdan girer girmez size kahve veya Türk çayı sunarız.
-        Önce sohbet, sonra altın.</p>
+    <div class="tester-grid reveal d1">
+      <div class="tester-photo">
+        <span class="frame"></span>
+        <img src="GOLDMAX-Gold-Testing-Machine.png" alt="Testeur d'or GoldMax" loading="lazy" />
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
       </div>
-      <div class="step reveal d1">
-        <span class="num">02</span>
-        <span class="icon">◈</span>
-        <h4>Dinleme</h4>
-        <p>Ne aradığınızı, bütçenizi ve tercihinizi dinleriz.
-        Önerilerimiz size göre şekillenir; standart bir satış
-        konuşması yoktur.</p>
-      </div>
-      <div class="step reveal d2">
-        <span class="num">03</span>
-        <span class="icon">✎</span>
-        <h4>Seçim</h4>
-        <p>Setleri tek tek gösterir, modellerin farkını anlatırız.
-        Karşılaştırın, düşünün, gerekirse geri dönün — aceleye
-        gelmez.</p>
-      </div>
-      <div class="step reveal d3">
-        <span class="num">04</span>
-        <span class="icon">✦</span>
-        <h4>Teslim</h4>
-        <p>Seçiminiz tartılır, 22 ayar sertifikası ile birlikte
-        kadife kutuya yerleştirilir ve elinize teslim edilir.</p>
+      <div class="tester-copy">
+        <span class="pill" data-i18n="craft.pill">Dernière génération · GoldMax</span>
+        <h3 data-i18n="craft.h3">Voici notre testeur d'or dernière génération avec lequel nous <em>vérifions nos pièces</em>.</h3>
+        <p data-i18n="craft.copy1">
+          Chaque pièce passe par le testeur GoldMax avant la vente — et, si vous le
+          souhaitez, sous vos yeux. Carats, pureté et grammage sont vérifiés en
+          quelques secondes, sans aucune dégradation.
+        </p>
+        <p data-i18n="craft.copy2">
+          Ainsi, l'or qui vous est remis n'est pas seulement garanti par notre parole,
+          mais aussi par la mesure.
+        </p>
+        <div class="tester-specs">
+          <div class="spec"><span class="k" data-i18n="craft.specMethodK">Méthode</span><span class="v" data-i18n="craft.specMethodV">XRF non destructif</span></div>
+          <div class="spec"><span class="k" data-i18n="craft.specTimeK">Durée</span><span class="v" data-i18n="craft.specTimeV">~ 5 secondes</span></div>
+          <div class="spec"><span class="k" data-i18n="craft.specCheckK">Vérification</span><span class="v" data-i18n="craft.specCheckV">Carats · Pureté · Grammage</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1304,12 +1398,12 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">04 — Müşterilerimizden</span>
-        <h2>Beş yıldız,<br /><em>üç dilde</em>.</h2>
+        <span class="tag" data-i18n="reviews.tag">04 — Nos clients</span>
+        <h2 data-i18n="reviews.title">Cinq étoiles,<br /><em>en trois langues</em>.</h2>
       </div>
-      <p>
-        Showroom'dan kadife kutuyla çıkıp ardından Google yorumu bırakan
-        misafirlerimizden birkaç söz.
+      <p data-i18n="reviews.p">
+        Quelques mots de visiteurs ayant quitté notre showroom avec leur écrin
+        de velours et publié ensuite un avis Google.
       </p>
     </div>
 
@@ -1317,16 +1411,16 @@
       <div class="rev-score">
         <span class="num">5.0</span>
         <div class="stars" aria-hidden="true">★★★★★</div>
-        <span class="src">Google Yorumları</span>
+        <span class="src" data-i18n="reviews.src">Avis Google</span>
       </div>
       <div class="rev-sep"></div>
-      <div class="rev-note">
-        Avenue Rogier showroom'unun doğrulanmış Google Maps yorumlarından
-        derlenmiştir. Aşağıdaki her referans, yazıldığı dilde aynen aktarılmıştır.
+      <div class="rev-note" data-i18n="reviews.note">
+        Compilé à partir des avis Google Maps vérifiés du showroom de l'Avenue
+        Rogier. Chaque témoignage est reproduit ici dans sa langue d'origine.
       </div>
     </div>
 
-    <div class="rev-marquee reveal" aria-label="Müşteri yorumları">
+    <div class="rev-marquee reveal" aria-label="Avis clients">
       <div class="rev-track" id="revTrack"><!-- populated by JS for seamless loop --></div>
     </div>
   </div>
@@ -1337,52 +1431,53 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <span class="tag">05 — Bizi Ziyaret Edin</span>
-        <h2><em>Avenue Rogier</em>'de<br />bir showroom.</h2>
+        <span class="tag" data-i18n="visit.tag">05 — Nous rendre visite</span>
+        <h2 data-i18n="visit.title">Un showroom sur l'<em>Avenue Rogier</em>.</h2>
       </div>
-      <p>
-        Uğrayın ya da özel bir randevu için arayın. Kahve, Türk çayı ve
-        sıfır baskı.
+      <p data-i18n="visit.p">
+        Passez sans rendez-vous, ou appelez-nous pour un créneau privé.
+        Café, thé turc, aucune pression.
       </p>
     </div>
 
     <div class="visit-grid reveal">
       <div class="map-embed">
-        <span class="map-label">Brüksel · Schaerbeek</span>
+        <span class="map-label" data-i18n="visit.mapLabel">Bruxelles · Schaerbeek</span>
         <iframe
-          src="https://www.google.com/maps?q=Avenue+Rogier+215,+1030+Schaerbeek,+Brussels,+Belgium&hl=tr&z=16&output=embed"
+          src="https://www.google.com/maps?q=Avenue+Rogier+215,+1030+Schaerbeek,+Brussels,+Belgium&hl=fr&z=16&output=embed"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen
-          title="Karaca Gold konumu — Av. Rogier 215, 1030 Schaerbeek"
+          title="Karaca Gold — Av. Rogier 215, 1030 Schaerbeek"
         ></iframe>
         <a class="map-open"
            href="https://www.google.com/maps/search/?api=1&query=Avenue+Rogier+215+1030+Schaerbeek"
-           target="_blank" rel="noopener">
-          Google Maps'te aç →
+           target="_blank" rel="noopener"
+           data-i18n="visit.mapOpen">
+          Ouvrir dans Google Maps →
         </a>
       </div>
       <div class="visit-copy">
-        <div class="open" id="openStatus"><span class="dot"></span>Saatler kontrol ediliyor…</div>
-        <h3>Karaca Gold <em>Atölyesi</em></h3>
-        <div class="row"><span class="lb">Adres</span><span class="val">Av. Rogier 215</span></div>
-        <div class="row"><span class="lb">Posta kodu</span><span class="val">1030 Schaerbeek</span></div>
-        <div class="row"><span class="lb">Telefon</span><span class="val"><a href="tel:+32486647907">0486 64 79 07</a></span></div>
-        <div class="row"><span class="lb">Ulaşım</span><span class="val">Tramvay 25 / 62</span></div>
+        <div class="open" id="openStatus"><span class="dot"></span><span data-i18n="visit.checking">Vérification des horaires…</span></div>
+        <h3 data-i18n="visit.h3">L'<em>Atelier</em> Karaca Gold</h3>
+        <div class="row"><span class="lb" data-i18n="visit.address">Adresse</span><span class="val">Av. Rogier 215</span></div>
+        <div class="row"><span class="lb" data-i18n="visit.postcode">Code postal</span><span class="val">1030 Schaerbeek</span></div>
+        <div class="row"><span class="lb" data-i18n="visit.phone">Téléphone</span><span class="val"><a href="tel:+32486647907">0486 64 79 07</a></span></div>
+        <div class="row"><span class="lb" data-i18n="visit.transport">Transports</span><span class="val" data-i18n="visit.transportV">Tram 25 / 62</span></div>
 
-        <div class="hours-table" aria-label="Çalışma saatleri">
-          <div class="hr-row" data-day="1"><span class="d">Pazartesi</span><span class="h">10:30 – 18:30</span></div>
-          <div class="hr-row" data-day="2"><span class="d">Salı</span><span class="h">10:30 – 18:30</span></div>
-          <div class="hr-row closed" data-day="3"><span class="d">Çarşamba</span><span class="h">Kapalı</span></div>
-          <div class="hr-row" data-day="4"><span class="d">Perşembe</span><span class="h">10:30 – 18:30</span></div>
-          <div class="hr-row" data-day="5"><span class="d">Cuma</span><span class="h">10:30 – 18:30</span></div>
-          <div class="hr-row" data-day="6"><span class="d">Cumartesi</span><span class="h">10:30 – 18:30</span></div>
-          <div class="hr-row" data-day="0"><span class="d">Pazar</span><span class="h">10:30 – 18:30</span></div>
+        <div class="hours-table" aria-label="Horaires d'ouverture">
+          <div class="hr-row" data-day="1"><span class="d" data-i18n="day.1">Lundi</span><span class="h">10:30 – 18:30</span></div>
+          <div class="hr-row" data-day="2"><span class="d" data-i18n="day.2">Mardi</span><span class="h">10:30 – 18:30</span></div>
+          <div class="hr-row closed" data-day="3"><span class="d" data-i18n="day.3">Mercredi</span><span class="h" data-i18n="visit.closed">Fermé</span></div>
+          <div class="hr-row" data-day="4"><span class="d" data-i18n="day.4">Jeudi</span><span class="h">10:30 – 18:30</span></div>
+          <div class="hr-row" data-day="5"><span class="d" data-i18n="day.5">Vendredi</span><span class="h">10:30 – 18:30</span></div>
+          <div class="hr-row" data-day="6"><span class="d" data-i18n="day.6">Samedi</span><span class="h">10:30 – 18:30</span></div>
+          <div class="hr-row" data-day="0"><span class="d" data-i18n="day.0">Dimanche</span><span class="h">10:30 – 18:30</span></div>
         </div>
 
         <div class="btn-row">
-          <a href="tel:+32486647907" class="btn">Showroom'u arayın →</a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Avenue+Rogier+215+1030+Schaerbeek" target="_blank" rel="noopener" class="btn ghost">Yol tarifi al</a>
+          <a href="tel:+32486647907" class="btn" data-i18n="visit.callBtn">Appeler le showroom →</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Avenue+Rogier+215+1030+Schaerbeek" target="_blank" rel="noopener" class="btn ghost" data-i18n="visit.directions">Itinéraire</a>
         </div>
       </div>
     </div>
@@ -1397,57 +1492,507 @@
         <img src="logo.png" alt="" />
         <span>Karaca Gold</span>
       </div>
-      <p>Brüksel Schaerbeek'in altın vitrini.
-      Sertifikalı 22 ayar Anadolu setleri, sakin bir karşılama ve
-      dürüst tavsiye.</p>
+      <p data-i18n="foot.tagline">La vitrine d'or de Schaerbeek, à Bruxelles.
+      Parures anatoliennes 22 carats certifiées, accueil tranquille et
+      conseils honnêtes.</p>
     </div>
     <div>
-      <h5>Keşfet</h5>
+      <h5 data-i18n="foot.exploreH">Découvrir</h5>
       <ul>
-        <li><a href="#atelier">Atölye</a></li>
-        <li><a href="#collections">Setler</a></li>
-        <li><a href="#bilezik">Bilezikler</a></li>
-        <li><a href="#kolye">Kolyeler</a></li>
-        <li><a href="#yuzuk">Yüzük & Küpe</a></li>
-        <li><a href="#ziynet">Ziynet Altınları</a></li>
-        <li><a href="#kulce">Külçe Altın</a></li>
-        <li><a href="#craft">Süreç</a></li>
-        <li><a href="#reviews">Yorumlar</a></li>
+        <li><a href="#atelier" data-i18n="nav.atelier">Atelier</a></li>
+        <li><a href="#collections" data-i18n="nav.collections">Collections</a></li>
+        <li><a href="#bilezik" data-i18n="nav.bracelets">Bracelets</a></li>
+        <li><a href="#kolye" data-i18n="nav.necklaces">Colliers</a></li>
+        <li><a href="#yuzuk" data-i18n="nav.rings">Bagues & Boucles</a></li>
+        <li><a href="#ziynet" data-i18n="nav.ziynet">Pièces d'or</a></li>
+        <li><a href="#kulce" data-i18n="nav.bars">Lingots</a></li>
+        <li><a href="#craft" data-i18n="foot.craftLink">Garantie</a></li>
+        <li><a href="#reviews" data-i18n="nav.reviews">Avis</a></li>
       </ul>
     </div>
     <div>
-      <h5>Hizmetler</h5>
+      <h5 data-i18n="foot.servicesH">Services</h5>
       <ul>
-        <li><a href="#">Özel setler</a></li>
-        <li><a href="#">Nişan yüzükleri</a></li>
-        <li><a href="#">Altın takası</a></li>
-        <li><a href="#">Onarım ve ölçü ayarı</a></li>
+        <li><a href="#" data-i18n="foot.svcCustom">Parures sur mesure</a></li>
+        <li><a href="#" data-i18n="foot.svcEng">Alliances et bagues de fiançailles</a></li>
+        <li><a href="#" data-i18n="foot.svcTrade">Reprise d'or</a></li>
+        <li><a href="#" data-i18n="foot.svcRepair">Réparation et mise à taille</a></li>
       </ul>
     </div>
     <div>
-      <h5>Bizi Bulun</h5>
+      <h5 data-i18n="foot.findH">Nous trouver</h5>
       <ul>
         <li><a href="https://www.google.com/maps/search/?api=1&query=Avenue+Rogier+215+1030+Schaerbeek" target="_blank" rel="noopener">Av. Rogier 215, 1030&nbsp;Schaerbeek</a></li>
         <li><a href="tel:+32486647907">0486 64 79 07</a></li>
-        <li><a href="#visit">Saatler ve yol tarifi</a></li>
-        <li><a href="#reviews">Google yorumları · 5.0 ★</a></li>
+        <li><a href="#visit" data-i18n="foot.findHours">Horaires et itinéraire</a></li>
+        <li><a href="#reviews" data-i18n="foot.findRev">Avis Google · 5.0 ★</a></li>
       </ul>
     </div>
   </div>
   <div class="sub">
     <span>© 2026 Karaca Gold · Av. Rogier 215, Schaerbeek</span>
-    <span>Brüksel · Belçika</span>
+    <span data-i18n="foot.country">Bruxelles · Belgique</span>
   </div>
 </footer>
 
 <!-- SCRIPT ============================================================= -->
 <script>
+/* ========================================================================
+   I18N — dictionary + setLang
+   ======================================================================== */
+const I18N = {
+  fr: {
+    "nav.atelier":"Atelier","nav.collections":"Collections","nav.bracelets":"Bracelets",
+    "nav.necklaces":"Colliers","nav.rings":"Bagues & Boucles","nav.ziynet":"Pièces d'or",
+    "nav.bars":"Lingots","nav.craft":"Garantie","nav.reviews":"Avis","nav.visit":"Visite",
+    "nav.callCta":"Appeler la boutique",
+    "menu.open":"Ouvrir le menu","menu.close":"Fermer le menu",
+
+    "hero.eyebrow":"Bruxelles · Schaerbeek",
+    "hero.line1":"Une vitrine sereine,","hero.line2":"de l'<em>or</em> certifié.",
+    "hero.lede":"À Bruxelles Schaerbeek, nous présentons les parures anatoliennes classiques — Kaburga, Trabzon Hasırı, Tuğralı — en or 22 carats certifié, dans une boutique sans aucune pression.",
+    "hero.ctaPrimary":"Découvrir les collections","hero.ctaGhost":"Visiter le showroom","hero.scroll":"Faire défiler",
+
+    "atelier.tag":"01 — À propos",
+    "atelier.title":"L'<em>or</em> anatolien,<br />à Schaerbeek.",
+    "atelier.capSub":"Bruxelles · Avenue Rogier 215","atelier.capTitle":"Showroom — Karaca Gold",
+    "atelier.h3":"Un seul standard :<br />22 carats, certifié.",
+    "atelier.p1":"Chaque pièce en vitrine est garantie 22 carats et livrée avec son certificat officiel. Alliage, poids et pureté sont inscrits clairement dans la boîte — aucune supposition.",
+    "atelier.p2":"Dans notre showroom de l'Avenue Rogier, pas de précipitation. Café ou thé turc, présentation modèle par modèle, réponses à toutes vos questions. Aucune pression — juste un échange et un choix tranquille.",
+    "atelier.statPurity":"Pureté minimale","atelier.statScore":"Note Google","atelier.statModels":"Modèles en vitrine",
+
+    "collections.tag":"02 — Parures",
+    "collections.title":"Parures complètes.<br />Signature <em>classique</em>.",
+    "collections.p":"Parures classiques en 4 pièces — bracelet, collier, bague et boucles d'oreilles assortis. Vous pouvez aussi parcourir chaque catégorie séparément.",
+
+    "badge.stone":"Avec pierres","badge.bestseller":"Bestseller","badge.new":"Nouveau",
+    "prod.hint.n":"Parure Hint İşi","prod.hint.t":"22 carats · 4 pièces",
+    "prod.baget.n":"Parure Baguettes","prod.baget.t":"22 carats · Baguettes",
+    "prod.trabzon.n":"Parure Trabzon Hasırı","prod.trabzon.t":"22 carats · Tressage main",
+    "prod.damla.n":"Parure Damla","prod.damla.t":"22 carats · Goutte",
+
+    "bilezik.tag":"02a — Collection de bracelets",
+    "bilezik.title":"<em>Bracelets</em><br />faits main.",
+    "bilezik.p":"Or 22 carats et motifs anatoliens classiques. Chaque modèle vous attend en vitrine.",
+    "bz.dorika":"Bracelet Dorika perlé","bz.tugrali":"Bracelet Tuğralı","bz.suyolu":"Bracelet Suyolu",
+    "bz.pullu":"Bracelet à écailles","bz.ceyrek":"Bracelet aux pièces d'or",
+    "bz.kelepce":"Bracelet manchette classique","bz.zincir":"Sélection de bracelets chaîne",
+    "bz.dalgali":"Bracelet anneau ondulé","bz.ajur":"Sélection de bracelets ajourés",
+    "bz.burma":"Bracelet anneau torsadé","bz.klasikHalka":"Bracelet anneau classique",
+    "bz.hasirKelepce":"Bracelet manchette tressée",
+
+    "kolye.tag":"02b — Collection de colliers",
+    "kolye.title":"<em>Colliers</em><br />faits main.",
+    "kolye.p":"L'or 22 carats rencontre le savoir-faire anatolien. Chaque modèle vous attend en vitrine.",
+    "kl.generic":"Collier en or 22 carats",
+
+    "yuzuk.tag":"02c — Bagues & Boucles d'oreilles",
+    "yuzuk.title":"<em>Bagues</em> et boucles<br />faits main.",
+    "yuzuk.p":"Or 22 carats, finition soignée. Tous les modèles peuvent être essayés en boutique.",
+    "yz.klasik":"Sélection de bagues classiques","yz.tugrali":"Sélection de bagues Tuğralı","yz.kupe":"Collection de boucles d'oreilles",
+
+    "ziynet.tag":"02d — Pièces d'or",
+    "ziynet.title":"Pièces d'or<br /><em>classiques</em>.",
+    "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası et Gremse — pièces de la République turque, originales et certifiées, indépendantes du cours quotidien.",
+    "zy.meta22":"22 carats",
+    "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
+    "zy.resat25":"Reşat 2,5","zy.resatTam":"Reşat Tam Altın","zy.gremse":"Gremse",
+    "zy.ata":"Ata Lirası","zy.beslibir":"Cinq pièces réunies",
+
+    "kulce.tag":"02e — Lingots d'or",
+    "kulce.title":"<em>Lingots</em> d'or<br />certifiés.",
+    "kulce.p":"Lingots Metalor pureté 999.9, certifiés. De 5 grammes à 100 grammes — le recto et le verso de chaque lingot sont visibles sur la carte.",
+    "kc.meta":"999.9 · Metalor",
+    "kc.5":"Lingot 5 g","kc.10":"Lingot 10 g","kc.20":"Lingot 20 g","kc.50":"Lingot 50 g","kc.100":"Lingot 100 g",
+
+    "craft.tag":"03 — Garantie","craft.title":"Chaque pièce est <em>testée</em>.",
+    "craft.p":"Chaque or de notre showroom est contrôlé avec le testeur dernière génération GoldMax. Carats, pureté et grammage — tout sous vos yeux.",
+    "craft.pill":"Dernière génération · GoldMax",
+    "craft.h3":"Voici notre testeur d'or dernière génération avec lequel nous <em>vérifions nos pièces</em>.",
+    "craft.copy1":"Chaque pièce passe par le testeur GoldMax avant la vente — et, si vous le souhaitez, sous vos yeux. Carats, pureté et grammage sont vérifiés en quelques secondes, sans aucune dégradation.",
+    "craft.copy2":"Ainsi, l'or qui vous est remis n'est pas seulement garanti par notre parole, mais aussi par la mesure.",
+    "craft.specMethodK":"Méthode","craft.specMethodV":"XRF non destructif",
+    "craft.specTimeK":"Durée","craft.specTimeV":"~ 5 secondes",
+    "craft.specCheckK":"Vérification","craft.specCheckV":"Carats · Pureté · Grammage",
+
+    "reviews.tag":"04 — Nos clients","reviews.title":"Cinq étoiles,<br /><em>en trois langues</em>.",
+    "reviews.p":"Quelques mots de visiteurs ayant quitté notre showroom avec leur écrin de velours et publié ensuite un avis Google.",
+    "reviews.src":"Avis Google",
+    "reviews.note":"Compilé à partir des avis Google Maps vérifiés du showroom de l'Avenue Rogier. Chaque témoignage est reproduit ici dans sa langue d'origine.",
+
+    "visit.tag":"05 — Nous rendre visite",
+    "visit.title":"Un showroom sur l'<em>Avenue Rogier</em>.",
+    "visit.p":"Passez sans rendez-vous, ou appelez-nous pour un créneau privé. Café, thé turc, aucune pression.",
+    "visit.mapLabel":"Bruxelles · Schaerbeek","visit.mapOpen":"Ouvrir dans Google Maps →",
+    "visit.checking":"Vérification des horaires…",
+    "visit.h3":"L'<em>Atelier</em> Karaca Gold",
+    "visit.address":"Adresse","visit.postcode":"Code postal","visit.phone":"Téléphone",
+    "visit.transport":"Transports","visit.transportV":"Tram 25 / 62",
+    "visit.closed":"Fermé","visit.callBtn":"Appeler le showroom →","visit.directions":"Itinéraire",
+
+    "day.0":"Dimanche","day.1":"Lundi","day.2":"Mardi","day.3":"Mercredi","day.4":"Jeudi","day.5":"Vendredi","day.6":"Samedi",
+    "day.tomorrow":"demain",
+    "status.openNow":"Ouvert · ferme à {time}",
+    "status.openLater":"Fermé · ouvre aujourd'hui à {time}",
+    "status.opensOn":"Fermé · ouvre {day} à {time}",
+
+    "foot.tagline":"La vitrine d'or de Schaerbeek, à Bruxelles. Parures anatoliennes 22 carats certifiées, accueil tranquille et conseils honnêtes.",
+    "foot.exploreH":"Découvrir","foot.servicesH":"Services","foot.findH":"Nous trouver",
+    "foot.craftLink":"Garantie",
+    "foot.svcCustom":"Parures sur mesure","foot.svcEng":"Alliances et bagues de fiançailles",
+    "foot.svcTrade":"Reprise d'or","foot.svcRepair":"Réparation et mise à taille",
+    "foot.findHours":"Horaires et itinéraire","foot.findRev":"Avis Google · 5.0 ★",
+    "foot.country":"Bruxelles · Belgique"
+  },
+  tr: {
+    "nav.atelier":"Atölye","nav.collections":"Koleksiyonlar","nav.bracelets":"Bilezikler",
+    "nav.necklaces":"Kolyeler","nav.rings":"Yüzük & Küpe","nav.ziynet":"Ziynet",
+    "nav.bars":"Külçe","nav.craft":"Güvence","nav.reviews":"Yorumlar","nav.visit":"Ziyaret Et",
+    "nav.callCta":"Atölyeyi Arayın",
+    "menu.open":"Menüyü aç","menu.close":"Menüyü kapat",
+
+    "hero.eyebrow":"Brüksel · Schaerbeek",
+    "hero.line1":"Sakin bir vitrin,","hero.line2":"sertifikalı <em>altın</em>.",
+    "hero.lede":"Brüksel Schaerbeek'te, klasik Anadolu setlerini — Kaburga, Trabzon Hasırı, Tuğralı — acelesi olmayan bir vitrinde, 22 ayar sertifikalı olarak sunuyoruz.",
+    "hero.ctaPrimary":"Koleksiyonları Keşfedin","hero.ctaGhost":"Showroom'u ziyaret edin","hero.scroll":"Kaydır",
+
+    "atelier.tag":"01 — Hakkımızda",
+    "atelier.title":"Schaerbeek'te<br />Anadolu <em>altını</em>.",
+    "atelier.capSub":"Brüksel · Avenue Rogier 215","atelier.capTitle":"Showroom — Karaca Gold",
+    "atelier.h3":"Tek bir standart:<br />22 ayar, sertifikalı.",
+    "atelier.p1":"Vitrindeki her parça 22 ayar garantilidir ve resmi sertifika ile teslim edilir. Alaşım, ağırlık ve saflık kutunun içinde açıkça yazılı — tahmin etmek zorunda kalmazsınız.",
+    "atelier.p2":"Avenue Rogier'deki showroom'umuzda acele yoktur. Kahve ya da Türk çayı ikram eder, modelleri tek tek anlatır, sorduğunuz her şeyi yanıtlarız. Baskı yok — yalnızca sohbet ve sakin bir seçim.",
+    "atelier.statPurity":"Minimum saflık","atelier.statScore":"Google puanı","atelier.statModels":"Vitrindeki model",
+
+    "collections.tag":"02 — Setler",
+    "collections.title":"Tam setler.<br />Klasik <em>imza</em>.",
+    "collections.p":"Bilezik, kolye, yüzük ve küpenin uyumlu olduğu klasik 4 parça setler. Bilezik, kolye ve yüzük modellerini ayrı bölümlerde de inceleyebilirsiniz.",
+
+    "badge.stone":"Taşlı","badge.bestseller":"En Çok Satan","badge.new":"Yeni",
+    "prod.hint.n":"Hint İşi Set","prod.hint.t":"22 Ayar · 4 parça",
+    "prod.baget.n":"Baget Taşlı Set","prod.baget.t":"22 Ayar · Baget",
+    "prod.trabzon.n":"Trabzon Hasırı Set","prod.trabzon.t":"22 Ayar · El örgüsü",
+    "prod.damla.n":"Damla Model Set","prod.damla.t":"22 Ayar · Damla",
+
+    "bilezik.tag":"02a — Bilezik Koleksiyonu",
+    "bilezik.title":"El işi <em>bilezik</em><br />modelleri.",
+    "bilezik.p":"22 ayar altın, klasik Anadolu motifleriyle. Her model vitrinde sizi bekliyor.",
+    "bz.dorika":"Dorika Toplu Bilezik","bz.tugrali":"Tuğralı Bilezik","bz.suyolu":"Suyolu Bilezik",
+    "bz.pullu":"Pullu Bilezik","bz.ceyrek":"Çeyrek Altınlı Bilezik",
+    "bz.kelepce":"Klasik Kelepçe Bilezik","bz.zincir":"Zincir Bilezik Seçkisi",
+    "bz.dalgali":"Dalgalı Halka Bilezik","bz.ajur":"Ajur Bilezik Seçkisi",
+    "bz.burma":"Burma Halka Bilezik","bz.klasikHalka":"Klasik Halka Bilezik",
+    "bz.hasirKelepce":"Hasır Kelepçe Bilezik",
+
+    "kolye.tag":"02b — Kolye Koleksiyonu",
+    "kolye.title":"El işi <em>kolye</em><br />modelleri.",
+    "kolye.p":"22 ayar altın, özgün Anadolu işçiliğiyle buluşuyor. Her model vitrinde sizi bekliyor.",
+    "kl.generic":"22 Ayar Altın Kolye",
+
+    "yuzuk.tag":"02c — Yüzük & Küpe",
+    "yuzuk.title":"El işi <em>yüzük</em><br />ve küpeler.",
+    "yuzuk.p":"22 ayar altın, ince işçilik. Vitrindeki tüm modeller şahsen denenebilir.",
+    "yz.klasik":"Klasik Yüzük Seçkisi","yz.tugrali":"Tuğralı Yüzük Seçkisi","yz.kupe":"Küpe Koleksiyonu",
+
+    "ziynet.tag":"02d — Ziynet Altınları",
+    "ziynet.title":"Klasik <em>ziynet</em><br />altın paraları.",
+    "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası ve Gremse — günlük borsadan bağımsız, sertifikalı orijinal Cumhuriyet altınları.",
+    "zy.meta22":"22 Ayar",
+    "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
+    "zy.resat25":"Reşat 2,5 Altın","zy.resatTam":"Reşat Tam Altın","zy.gremse":"Gremse Altını",
+    "zy.ata":"Ata Lirası","zy.beslibir":"5'i Bir Yerde",
+
+    "kulce.tag":"02e — Külçe Altın",
+    "kulce.title":"Sertifikalı <em>külçe</em><br />altın.",
+    "kulce.p":"Metalor 999.9 saflıkta, sertifikalı külçe altınlar. 5 gramdan 100 grama kadar — her külçenin ön ve arka yüzü kart üzerinde gösterilir.",
+    "kc.meta":"999.9 · Metalor",
+    "kc.5":"5 Gram Külçe","kc.10":"10 Gram Külçe","kc.20":"20 Gram Külçe","kc.50":"50 Gram Külçe","kc.100":"100 Gram Külçe",
+
+    "craft.tag":"03 — Güvence","craft.title":"Her altın <em>test edilir</em>.",
+    "craft.p":"Showroom'umuzdaki her altın, son model GoldMax test cihazıyla kontrol edilir. Ayar, saflık ve gramaj — hepsi sizin önünüzde.",
+    "craft.pill":"Son Model · GoldMax",
+    "craft.h3":"İşte son model altın test cihazıyla <em>altınlarımızı test ediyoruz</em>.",
+    "craft.copy1":"Her parça, satıştan önce ve isterseniz gözünüzün önünde GoldMax altın test cihazından geçer. Ayar değeri, saflık oranı ve gramaj saniyeler içinde, tahribatsız biçimde doğrulanır.",
+    "craft.copy2":"Böylece elinize geçen altının arkasında sadece sözümüz değil, ölçüm sonucu da var.",
+    "craft.specMethodK":"Yöntem","craft.specMethodV":"Tahribatsız XRF",
+    "craft.specTimeK":"Süre","craft.specTimeV":"~ 5 saniye",
+    "craft.specCheckK":"Doğrulama","craft.specCheckV":"Ayar · Saflık · Gramaj",
+
+    "reviews.tag":"04 — Müşterilerimizden","reviews.title":"Beş yıldız,<br /><em>üç dilde</em>.",
+    "reviews.p":"Showroom'dan kadife kutuyla çıkıp ardından Google yorumu bırakan misafirlerimizden birkaç söz.",
+    "reviews.src":"Google Yorumları",
+    "reviews.note":"Avenue Rogier showroom'unun doğrulanmış Google Maps yorumlarından derlenmiştir. Aşağıdaki her referans, yazıldığı dilde aynen aktarılmıştır.",
+
+    "visit.tag":"05 — Bizi Ziyaret Edin",
+    "visit.title":"<em>Avenue Rogier</em>'de<br />bir showroom.",
+    "visit.p":"Uğrayın ya da özel bir randevu için arayın. Kahve, Türk çayı ve sıfır baskı.",
+    "visit.mapLabel":"Brüksel · Schaerbeek","visit.mapOpen":"Google Maps'te aç →",
+    "visit.checking":"Saatler kontrol ediliyor…",
+    "visit.h3":"Karaca Gold <em>Atölyesi</em>",
+    "visit.address":"Adres","visit.postcode":"Posta kodu","visit.phone":"Telefon",
+    "visit.transport":"Ulaşım","visit.transportV":"Tramvay 25 / 62",
+    "visit.closed":"Kapalı","visit.callBtn":"Showroom'u arayın →","visit.directions":"Yol tarifi al",
+
+    "day.0":"Pazar","day.1":"Pazartesi","day.2":"Salı","day.3":"Çarşamba","day.4":"Perşembe","day.5":"Cuma","day.6":"Cumartesi",
+    "day.tomorrow":"yarın",
+    "status.openNow":"Şu an açık · {time}'da kapanır",
+    "status.openLater":"Kapalı · bugün {time}'da açılır",
+    "status.opensOn":"Kapalı · {day} {time}'da açılır",
+
+    "foot.tagline":"Brüksel Schaerbeek'in altın vitrini. Sertifikalı 22 ayar Anadolu setleri, sakin bir karşılama ve dürüst tavsiye.",
+    "foot.exploreH":"Keşfet","foot.servicesH":"Hizmetler","foot.findH":"Bizi Bulun",
+    "foot.craftLink":"Güvence",
+    "foot.svcCustom":"Özel setler","foot.svcEng":"Nişan yüzükleri",
+    "foot.svcTrade":"Altın takası","foot.svcRepair":"Onarım ve ölçü ayarı",
+    "foot.findHours":"Saatler ve yol tarifi","foot.findRev":"Google yorumları · 5.0 ★",
+    "foot.country":"Brüksel · Belçika"
+  },
+  nl: {
+    "nav.atelier":"Atelier","nav.collections":"Collecties","nav.bracelets":"Armbanden",
+    "nav.necklaces":"Kettingen","nav.rings":"Ringen & Oorbellen","nav.ziynet":"Goudmunten",
+    "nav.bars":"Goudbaren","nav.craft":"Garantie","nav.reviews":"Reviews","nav.visit":"Bezoek",
+    "nav.callCta":"Bel de winkel",
+    "menu.open":"Menu openen","menu.close":"Menu sluiten",
+
+    "hero.eyebrow":"Brussel · Schaarbeek",
+    "hero.line1":"Een rustige boutique,","hero.line2":"gecertificeerd <em>goud</em>.",
+    "hero.lede":"In Brussel Schaarbeek tonen wij klassieke Anatolische sets — Kaburga, Trabzon Hasırı, Tuğralı — in 22-karaats gecertificeerd goud, in een boutique zonder enige druk.",
+    "hero.ctaPrimary":"Ontdek de collecties","hero.ctaGhost":"Bezoek de showroom","hero.scroll":"Scroll",
+
+    "atelier.tag":"01 — Over ons",
+    "atelier.title":"Anatolisch <em>goud</em>,<br />in Schaarbeek.",
+    "atelier.capSub":"Brussel · Avenue Rogier 215","atelier.capTitle":"Showroom — Karaca Gold",
+    "atelier.h3":"Eén enkele standaard:<br />22 karaat, gecertificeerd.",
+    "atelier.p1":"Elk stuk in onze etalage is gegarandeerd 22 karaat en wordt geleverd met officieel certificaat. Legering, gewicht en zuiverheid staan duidelijk in de doos — niets om te raden.",
+    "atelier.p2":"In onze showroom op de Avenue Rogier is er geen haast. Koffie of Turkse thee, model voor model toegelicht, al uw vragen beantwoord. Geen druk — alleen een gesprek en een rustige keuze.",
+    "atelier.statPurity":"Minimale zuiverheid","atelier.statScore":"Google-score","atelier.statModels":"Modellen in winkel",
+
+    "collections.tag":"02 — Sets",
+    "collections.title":"Complete sets.<br />Klassieke <em>signatuur</em>.",
+    "collections.p":"Klassieke vierdelige sets — armband, ketting, ring en oorbellen op elkaar afgestemd. U kunt elke categorie ook apart bekijken.",
+
+    "badge.stone":"Met stenen","badge.bestseller":"Bestseller","badge.new":"Nieuw",
+    "prod.hint.n":"Hint İşi-set","prod.hint.t":"22 karaat · 4 stuks",
+    "prod.baget.n":"Baguette-set","prod.baget.t":"22 karaat · Baguette",
+    "prod.trabzon.n":"Trabzon Hasırı-set","prod.trabzon.t":"22 karaat · Handgevlochten",
+    "prod.damla.n":"Damla-set","prod.damla.t":"22 karaat · Druppel",
+
+    "bilezik.tag":"02a — Armbandcollectie",
+    "bilezik.title":"Handgemaakte<br /><em>armbanden</em>.",
+    "bilezik.p":"22-karaats goud met klassieke Anatolische motieven. Elk model wacht u in de winkel.",
+    "bz.dorika":"Dorika-bolletjesarmband","bz.tugrali":"Tuğralı-armband","bz.suyolu":"Suyolu-armband",
+    "bz.pullu":"Schubarmband","bz.ceyrek":"Armband met goudmunten",
+    "bz.kelepce":"Klassieke manchetarmband","bz.zincir":"Selectie kettingarmbanden",
+    "bz.dalgali":"Golvende ringarmband","bz.ajur":"Selectie opengewerkte armbanden",
+    "bz.burma":"Gedraaide ringarmband","bz.klasikHalka":"Klassieke ringarmband",
+    "bz.hasirKelepce":"Gevlochten manchetarmband",
+
+    "kolye.tag":"02b — Kettingcollectie",
+    "kolye.title":"Handgemaakte<br /><em>kettingen</em>.",
+    "kolye.p":"22-karaats goud ontmoet Anatolisch vakmanschap. Elk model wacht u in de winkel.",
+    "kl.generic":"22-karaats gouden ketting",
+
+    "yuzuk.tag":"02c — Ringen & Oorbellen",
+    "yuzuk.title":"Handgemaakte <em>ringen</em><br />en oorbellen.",
+    "yuzuk.p":"22-karaats goud, fijne afwerking. Alle modellen kunnen in de winkel gepast worden.",
+    "yz.klasik":"Selectie klassieke ringen","yz.tugrali":"Selectie Tuğralı-ringen","yz.kupe":"Oorbellencollectie",
+
+    "ziynet.tag":"02d — Goudmunten",
+    "ziynet.title":"Klassieke<br /><em>goudmunten</em>.",
+    "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası en Gremse — originele en gecertificeerde munten van de Turkse Republiek, onafhankelijk van de dagkoers.",
+    "zy.meta22":"22 karaat",
+    "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
+    "zy.resat25":"Reşat 2,5","zy.resatTam":"Reşat Tam Altın","zy.gremse":"Gremse",
+    "zy.ata":"Ata Lirası","zy.beslibir":"Vijf munten samen",
+
+    "kulce.tag":"02e — Goudbaren",
+    "kulce.title":"Gecertificeerde<br /><em>goudbaren</em>.",
+    "kulce.p":"Metalor goudbaren met zuiverheid 999.9, gecertificeerd. Van 5 gram tot 100 gram — voor- en achterzijde van elke baar zijn zichtbaar op de kaart.",
+    "kc.meta":"999.9 · Metalor",
+    "kc.5":"Baar 5 g","kc.10":"Baar 10 g","kc.20":"Baar 20 g","kc.50":"Baar 50 g","kc.100":"Baar 100 g",
+
+    "craft.tag":"03 — Garantie","craft.title":"Elk stuk wordt <em>getest</em>.",
+    "craft.p":"Elk goud in onze showroom wordt gecontroleerd met de nieuwste GoldMax-tester. Karaat, zuiverheid en gewicht — alles voor uw ogen.",
+    "craft.pill":"Nieuwste model · GoldMax",
+    "craft.h3":"Met onze nieuwste goudtester <em>controleren wij onze stukken</em>.",
+    "craft.copy1":"Elk stuk wordt vóór de verkoop — en als u dat wenst voor uw ogen — door de GoldMax-tester gehaald. Karaat, zuiverheid en gewicht worden in enkele seconden zonder beschadiging vastgesteld.",
+    "craft.copy2":"Zo wordt het goud dat u meeneemt niet alleen door ons woord, maar ook door de meting gegarandeerd.",
+    "craft.specMethodK":"Methode","craft.specMethodV":"Niet-destructieve XRF",
+    "craft.specTimeK":"Duur","craft.specTimeV":"~ 5 seconden",
+    "craft.specCheckK":"Controle","craft.specCheckV":"Karaat · Zuiverheid · Gewicht",
+
+    "reviews.tag":"04 — Onze klanten","reviews.title":"Vijf sterren,<br /><em>in drie talen</em>.",
+    "reviews.p":"Een paar woorden van bezoekers die onze showroom verlieten met hun fluwelen doosje en daarna een Google-review achterlieten.",
+    "reviews.src":"Google-reviews",
+    "reviews.note":"Samengesteld uit geverifieerde Google Maps-reviews van de Avenue Rogier-showroom. Elk getuigenis is hier weergegeven in de oorspronkelijke taal.",
+
+    "visit.tag":"05 — Bezoek ons",
+    "visit.title":"Een showroom op de<br /><em>Avenue Rogier</em>.",
+    "visit.p":"Loop binnen, of bel ons voor een privé-afspraak. Koffie, Turkse thee en geen druk.",
+    "visit.mapLabel":"Brussel · Schaarbeek","visit.mapOpen":"Open in Google Maps →",
+    "visit.checking":"Openingsuren controleren…",
+    "visit.h3":"Het <em>Atelier</em> Karaca Gold",
+    "visit.address":"Adres","visit.postcode":"Postcode","visit.phone":"Telefoon",
+    "visit.transport":"Vervoer","visit.transportV":"Tram 25 / 62",
+    "visit.closed":"Gesloten","visit.callBtn":"Bel de showroom →","visit.directions":"Route",
+
+    "day.0":"Zondag","day.1":"Maandag","day.2":"Dinsdag","day.3":"Woensdag","day.4":"Donderdag","day.5":"Vrijdag","day.6":"Zaterdag",
+    "day.tomorrow":"morgen",
+    "status.openNow":"Nu open · sluit om {time}",
+    "status.openLater":"Gesloten · opent vandaag om {time}",
+    "status.opensOn":"Gesloten · opent {day} om {time}",
+
+    "foot.tagline":"De goudwinkel van Brussel Schaarbeek. Gecertificeerde 22-karaats Anatolische sets, rustig onthaal en eerlijk advies.",
+    "foot.exploreH":"Ontdekken","foot.servicesH":"Diensten","foot.findH":"Vind ons",
+    "foot.craftLink":"Garantie",
+    "foot.svcCustom":"Sets op maat","foot.svcEng":"Trouw- en verlovingsringen",
+    "foot.svcTrade":"Goud inruilen","foot.svcRepair":"Reparatie en op maat maken",
+    "foot.findHours":"Openingsuren en route","foot.findRev":"Google-reviews · 5.0 ★",
+    "foot.country":"Brussel · België"
+  },
+  en: {
+    "nav.atelier":"Atelier","nav.collections":"Collections","nav.bracelets":"Bracelets",
+    "nav.necklaces":"Necklaces","nav.rings":"Rings & Earrings","nav.ziynet":"Gold coins",
+    "nav.bars":"Bars","nav.craft":"Guarantee","nav.reviews":"Reviews","nav.visit":"Visit",
+    "nav.callCta":"Call the shop",
+    "menu.open":"Open menu","menu.close":"Close menu",
+
+    "hero.eyebrow":"Brussels · Schaerbeek",
+    "hero.line1":"A calm boutique,","hero.line2":"certified <em>gold</em>.",
+    "hero.lede":"In Brussels Schaerbeek, we present classic Anatolian sets — Kaburga, Trabzon Hasırı, Tuğralı — in certified 22-carat gold, in a showroom with no sales pressure.",
+    "hero.ctaPrimary":"Discover the collections","hero.ctaGhost":"Visit the showroom","hero.scroll":"Scroll",
+
+    "atelier.tag":"01 — About",
+    "atelier.title":"Anatolian <em>gold</em>,<br />in Schaerbeek.",
+    "atelier.capSub":"Brussels · Avenue Rogier 215","atelier.capTitle":"Showroom — Karaca Gold",
+    "atelier.h3":"One standard:<br />22 carat, certified.",
+    "atelier.p1":"Every piece on display is guaranteed 22 carat and delivered with an official certificate. Alloy, weight and purity are clearly stated in the box — nothing left to guess.",
+    "atelier.p2":"In our Avenue Rogier showroom there is no rush. Coffee or Turkish tea, models presented one by one, every question answered. No pressure — just a conversation and a calm choice.",
+    "atelier.statPurity":"Minimum purity","atelier.statScore":"Google rating","atelier.statModels":"Models on display",
+
+    "collections.tag":"02 — Sets",
+    "collections.title":"Complete sets.<br />Classic <em>signature</em>.",
+    "collections.p":"Classic four-piece sets — matching bracelet, necklace, ring and earrings. You can also browse each category separately.",
+
+    "badge.stone":"With stones","badge.bestseller":"Bestseller","badge.new":"New",
+    "prod.hint.n":"Hint İşi Set","prod.hint.t":"22 carat · 4 pieces",
+    "prod.baget.n":"Baguette Set","prod.baget.t":"22 carat · Baguette",
+    "prod.trabzon.n":"Trabzon Hasırı Set","prod.trabzon.t":"22 carat · Hand-woven",
+    "prod.damla.n":"Damla Set","prod.damla.t":"22 carat · Drop",
+
+    "bilezik.tag":"02a — Bracelet collection",
+    "bilezik.title":"Handmade<br /><em>bracelets</em>.",
+    "bilezik.p":"22-carat gold with classic Anatolian motifs. Every model is waiting for you in the showroom.",
+    "bz.dorika":"Dorika Beaded Bracelet","bz.tugrali":"Tuğralı Bracelet","bz.suyolu":"Suyolu Bracelet",
+    "bz.pullu":"Scale Bracelet","bz.ceyrek":"Bracelet with Gold Coins",
+    "bz.kelepce":"Classic Cuff Bracelet","bz.zincir":"Chain Bracelet Selection",
+    "bz.dalgali":"Wavy Bangle","bz.ajur":"Openwork Bracelet Selection",
+    "bz.burma":"Twisted Bangle","bz.klasikHalka":"Classic Bangle",
+    "bz.hasirKelepce":"Woven Cuff Bracelet",
+
+    "kolye.tag":"02b — Necklace collection",
+    "kolye.title":"Handmade<br /><em>necklaces</em>.",
+    "kolye.p":"22-carat gold meets Anatolian craftsmanship. Every model is waiting for you in the showroom.",
+    "kl.generic":"22-carat Gold Necklace",
+
+    "yuzuk.tag":"02c — Rings & Earrings",
+    "yuzuk.title":"Handmade <em>rings</em><br />and earrings.",
+    "yuzuk.p":"22-carat gold, fine craftsmanship. All models can be tried on in the showroom.",
+    "yz.klasik":"Classic Ring Selection","yz.tugrali":"Tuğralı Ring Selection","yz.kupe":"Earring Collection",
+
+    "ziynet.tag":"02d — Gold coins",
+    "ziynet.title":"Classic<br /><em>gold coins</em>.",
+    "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası and Gremse — original, certified Turkish Republic coins, independent of the daily exchange rate.",
+    "zy.meta22":"22 carat",
+    "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
+    "zy.resat25":"Reşat 2.5","zy.resatTam":"Reşat Full Altın","zy.gremse":"Gremse",
+    "zy.ata":"Ata Lirası","zy.beslibir":"Five Coins Together",
+
+    "kulce.tag":"02e — Gold bars",
+    "kulce.title":"Certified<br /><em>gold bars</em>.",
+    "kulce.p":"Metalor 999.9 purity certified gold bars. From 5 grams to 100 grams — front and back of each bar are visible on the card.",
+    "kc.meta":"999.9 · Metalor",
+    "kc.5":"5 g Bar","kc.10":"10 g Bar","kc.20":"20 g Bar","kc.50":"50 g Bar","kc.100":"100 g Bar",
+
+    "craft.tag":"03 — Guarantee","craft.title":"Every piece is <em>tested</em>.",
+    "craft.p":"Every piece in our showroom is checked with the latest-generation GoldMax tester. Carat, purity and weight — all in front of you.",
+    "craft.pill":"Latest model · GoldMax",
+    "craft.h3":"Here is our latest-generation gold tester with which we <em>verify our pieces</em>.",
+    "craft.copy1":"Each piece goes through the GoldMax tester before sale — and, if you wish, in front of you. Carat, purity and weight are confirmed in seconds, with no damage.",
+    "craft.copy2":"So the gold you take home is backed not just by our word, but by the measurement.",
+    "craft.specMethodK":"Method","craft.specMethodV":"Non-destructive XRF",
+    "craft.specTimeK":"Duration","craft.specTimeV":"~ 5 seconds",
+    "craft.specCheckK":"Verification","craft.specCheckV":"Carat · Purity · Weight",
+
+    "reviews.tag":"04 — Our customers","reviews.title":"Five stars,<br /><em>in three languages</em>.",
+    "reviews.p":"A few words from guests who left our showroom with their velvet box and afterwards posted a Google review.",
+    "reviews.src":"Google reviews",
+    "reviews.note":"Compiled from verified Google Maps reviews of the Avenue Rogier showroom. Each testimonial is reproduced here in its original language.",
+
+    "visit.tag":"05 — Visit us",
+    "visit.title":"A showroom on<br /><em>Avenue Rogier</em>.",
+    "visit.p":"Drop by, or call us for a private appointment. Coffee, Turkish tea, zero pressure.",
+    "visit.mapLabel":"Brussels · Schaerbeek","visit.mapOpen":"Open in Google Maps →",
+    "visit.checking":"Checking opening hours…",
+    "visit.h3":"The Karaca Gold <em>Atelier</em>",
+    "visit.address":"Address","visit.postcode":"Postcode","visit.phone":"Phone",
+    "visit.transport":"Transport","visit.transportV":"Tram 25 / 62",
+    "visit.closed":"Closed","visit.callBtn":"Call the showroom →","visit.directions":"Directions",
+
+    "day.0":"Sunday","day.1":"Monday","day.2":"Tuesday","day.3":"Wednesday","day.4":"Thursday","day.5":"Friday","day.6":"Saturday",
+    "day.tomorrow":"tomorrow",
+    "status.openNow":"Open now · closes at {time}",
+    "status.openLater":"Closed · opens today at {time}",
+    "status.opensOn":"Closed · opens {day} at {time}",
+
+    "foot.tagline":"The gold boutique of Brussels Schaerbeek. Certified 22-carat Anatolian sets, calm welcome and honest advice.",
+    "foot.exploreH":"Explore","foot.servicesH":"Services","foot.findH":"Find us",
+    "foot.craftLink":"Guarantee",
+    "foot.svcCustom":"Custom sets","foot.svcEng":"Wedding & engagement rings",
+    "foot.svcTrade":"Gold trade-in","foot.svcRepair":"Repair and resizing",
+    "foot.findHours":"Hours and directions","foot.findRev":"Google reviews · 5.0 ★",
+    "foot.country":"Brussels · Belgium"
+  }
+};
+
+window.__lang = 'fr';
+function t(key, vars){
+  const dict = I18N[window.__lang] || I18N.fr;
+  let s = (dict && dict[key]) || (I18N.fr && I18N.fr[key]) || "";
+  if (vars) Object.keys(vars).forEach(k => { s = s.split("{"+k+"}").join(vars[k]); });
+  return s;
+}
+function applyI18n(root){
+  const scope = root || document;
+  scope.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.innerHTML = val;
+  });
+}
+function setLang(lang){
+  if (!I18N[lang]) lang = 'fr';
+  window.__lang = lang;
+  try { localStorage.setItem('kg_lang', lang); } catch(_){}
+  document.documentElement.setAttribute('lang', lang);
+  applyI18n();
+  document.querySelectorAll('#langSwitch button').forEach(b => {
+    b.classList.toggle('on', b.dataset.lang === lang);
+  });
+  if (window.__updateOpenStatus) window.__updateOpenStatus();
+  const burgerEl = document.getElementById('burger');
+  if (burgerEl){
+    const open = burgerEl.classList.contains('open');
+    burgerEl.setAttribute('aria-label', t(open ? 'menu.close' : 'menu.open'));
+  }
+}
+
 /* Products ============================================================ */
 const products = [
-  {n:"Hint İşi Set",       t:"22 Ayar · 4 parça",   p:"€ 3,980", c:"classic",  img:"imgkaraca/Gemini_Generated_Image_dt8ie6dt8ie6dt8i.png"},
-  {n:"Baget Taşlı Set",    t:"22 Ayar · Baget",     p:"€ 5,120", c:"stone",    tag:"Taşlı",        img:"imgkaraca/Gemini_Generated_Image_x2h0fqx2h0fqx2h0.png"},
-  {n:"Trabzon Hasırı Set", t:"22 Ayar · El örgüsü", p:"€ 4,650", c:"heritage", tag:"En Çok Satan", img:"imgkaraca/Gemini_Generated_Image_sy0zlysy0zlysy0z.png"},
-  {n:"Damla Model Set",    t:"22 Ayar · Damla",     p:"€ 3,990", c:"modern",   tag:"Yeni",         img:"imgkaraca/Gemini_Generated_Image_6ok7on6ok7on6ok7.png"},
+  {key:"prod.hint",    p:"€ 3,980", c:"classic",  img:"imgkaraca/Gemini_Generated_Image_dt8ie6dt8ie6dt8i.png"},
+  {key:"prod.baget",   p:"€ 5,120", c:"stone",    tagKey:"badge.stone",     img:"imgkaraca/Gemini_Generated_Image_x2h0fqx2h0fqx2h0.png"},
+  {key:"prod.trabzon", p:"€ 4,650", c:"heritage", tagKey:"badge.bestseller",img:"imgkaraca/Gemini_Generated_Image_sy0zlysy0zlysy0z.png"},
+  {key:"prod.damla",   p:"€ 3,990", c:"modern",   tagKey:"badge.new",       img:"imgkaraca/Gemini_Generated_Image_6ok7on6ok7on6ok7.png"},
 ];
 
 /* Wireframe illustrations — drawn with inline SVG per product. */
@@ -1516,17 +2061,17 @@ const wireSVG = (i) => {
 const grid = document.getElementById("grid");
 grid.innerHTML = products.map((p,i)=>`
   <article class="card${p.featured?' featured':''}" data-c="${p.c}">
-    ${p.tag?`<span class="badge">${p.tag}</span>`:""}
+    ${p.tagKey?`<span class="badge" data-i18n="${p.tagKey}"></span>`:""}
     <span class="hint">→</span>
     <div class="media">
       ${p.img
-        ? `<div class="photo"><img src="${p.img}" alt="${p.n}" loading="lazy" /></div>`
+        ? `<div class="photo"><img src="${p.img}" alt="" loading="lazy" /></div>`
         : `<div class="wire">${wireSVG(i)}</div>`}
     </div>
     <div class="info">
       <div>
-        <h4>${p.n}</h4>
-        <div class="meta">${p.t}</div>
+        <h4 data-i18n="${p.key}.n"></h4>
+        <div class="meta" data-i18n="${p.key}.t"></div>
       </div>
       <div class="price">${p.p}</div>
     </div>
@@ -1613,7 +2158,7 @@ function setMenu(open){
   burger.classList.toggle("open", open);
   navMenu.classList.toggle("open", open);
   burger.setAttribute("aria-expanded", String(open));
-  burger.setAttribute("aria-label", open ? "Menüyü kapat" : "Menüyü aç");
+  burger.setAttribute("aria-label", t(open ? "menu.close" : "menu.open"));
   document.body.style.overflow = open ? "hidden" : "";
 }
 burger.addEventListener("click", ()=> setMenu(!navMenu.classList.contains("open")));
@@ -1633,9 +2178,10 @@ const cio = new IntersectionObserver(entries=>{
     function tick(now){
       const t = Math.min(1,(now-start)/dur);
       const eased = 1 - Math.pow(1-t,3);
-      el.textContent = Math.floor(eased*target).toLocaleString("tr-TR");
+      const locale = (window.__lang||'fr')==='tr' ? 'tr-TR' : (window.__lang==='nl'?'nl-BE':(window.__lang==='en'?'en-GB':'fr-BE'));
+      el.textContent = Math.floor(eased*target).toLocaleString(locale);
       if(t<1) requestAnimationFrame(tick);
-      else el.textContent = target.toLocaleString("tr-TR") + "+";
+      else el.textContent = target.toLocaleString(locale) + "+";
     }
     requestAnimationFrame(tick);
     cio.unobserve(el);
@@ -1644,19 +2190,18 @@ const cio = new IntersectionObserver(entries=>{
 counters.forEach(c=>cio.observe(c));
 
 
-/* Open / closed indicator (TR) ======================================== */
+/* Open / closed indicator (i18n) ====================================== */
 (function(){
   // 0=Sun, 1=Mon, ... 6=Sat. Wednesday (3) closed.
   const HOURS = [
-    {open:"10:30",close:"18:30"}, // Pazar
-    {open:"10:30",close:"18:30"}, // Pazartesi
-    {open:"10:30",close:"18:30"}, // Salı
-    null,                          // Çarşamba KAPALI
-    {open:"10:30",close:"18:30"}, // Perşembe
-    {open:"10:30",close:"18:30"}, // Cuma
-    {open:"10:30",close:"18:30"}, // Cumartesi
+    {open:"10:30",close:"18:30"}, // Sun
+    {open:"10:30",close:"18:30"}, // Mon
+    {open:"10:30",close:"18:30"}, // Tue
+    null,                          // Wed CLOSED
+    {open:"10:30",close:"18:30"}, // Thu
+    {open:"10:30",close:"18:30"}, // Fri
+    {open:"10:30",close:"18:30"}, // Sat
   ];
-  const DAY_LABEL = ["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"];
   function toMin(s){const [h,m]=s.split(":").map(Number);return h*60+m}
   function update(){
     const now = new Date();
@@ -1666,28 +2211,26 @@ counters.forEach(c=>cio.observe(c));
     const el = document.getElementById("openStatus");
     if(!el) return;
     if(today && mins>=toMin(today.open) && mins<toMin(today.close)){
-      // 1) Şu an açık
       el.classList.remove("is-closed");
-      el.innerHTML = `<span class="dot"></span>Şu an açık · ${today.close}'da kapanır`;
+      el.innerHTML = `<span class="dot"></span>${t("status.openNow",{time:today.close})}`;
     } else if(today && mins<toMin(today.open)){
-      // 2) Bugün açık ama henüz açılmadı
       el.classList.add("is-closed");
-      el.innerHTML = `<span class="dot"></span>Kapalı · bugün ${today.open}'da açılır`;
+      el.innerHTML = `<span class="dot"></span>${t("status.openLater",{time:today.open})}`;
     } else {
-      // 3) Bugün kapalı veya kapanış geçti → bir sonraki açık günü bul
       el.classList.add("is-closed");
-      let i=1, next=null, label="";
+      let i=1, next=null, dayKey="";
       while(i<=7){
         const nd = (d+i)%7;
-        if(HOURS[nd]){ next=HOURS[nd]; label=(i===1?"yarın":DAY_LABEL[nd]); break; }
+        if(HOURS[nd]){ next=HOURS[nd]; dayKey=(i===1?"day.tomorrow":"day."+nd); break; }
         i++;
       }
-      el.innerHTML = `<span class="dot"></span>Kapalı · ${label} ${next?next.open:""}'da açılır`;
+      el.innerHTML = `<span class="dot"></span>${t("status.opensOn",{day:t(dayKey), time:next?next.open:""})}`;
     }
     document.querySelectorAll(".hours-table .hr-row").forEach(r=>{
       r.classList.toggle("today", +r.dataset.day === d);
     });
   }
+  window.__updateOpenStatus = update;
   update();
   setInterval(update, 60000);
 })();
@@ -1695,33 +2238,33 @@ counters.forEach(c=>cio.observe(c));
 /* Galeri verileri =====================================================
    Yeni foto eklemek için: ilgili klasöre dosyayı koy + buraya {img, label} satırı ekle. */
 const bilezikItems = [
-  {img:"imgkaraca/Gemini_Generated_Image_39m7al39m7al39m7.png",       label:"Dorika Toplu Bilezik"},
-  {img:"imgkaraca/Gemini_Generated_Image_4nk7hh4nk7hh4nk7.png",       label:"Tuğralı Bilezik"},
-  {img:"imgkaraca/Gemini_Generated_Image_1jtjdt1jtjdt1jtj.png",       label:"Suyolu Bilezik"},
-  {img:"imgkaraca/Gemini_Generated_Image_33l48233l48233l4.png",       label:"Pullu Bilezik"},
-  {img:"imgkaraca/Gemini_Generated_Image_w41ujfw41ujfw41u.png",       label:"Çeyrek Altınlı Bilezik"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_2m1o6z2m1o6z2m1o.png",  label:"Klasik Kelepçe Bilezik"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_b2oxj6b2oxj6b2ox.png",  label:"Zincir Bilezik Seçkisi"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_c69aj5c69aj5c69a.png",  label:"Dalgalı Halka Bilezik"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_izjd72izjd72izjd.png",  label:"Ajur Bilezik Seçkisi"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_mwsscwmwsscwmwss.png",  label:"Burma Halka Bilezik"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_okeorpokeorpokeo.png", label:"Klasik Halka Bilezik"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_osqi7yosqi7yosqi.png",  label:"Hasır Kelepçe Bilezik"},
+  {img:"imgkaraca/Gemini_Generated_Image_39m7al39m7al39m7.png",       key:"bz.dorika"},
+  {img:"imgkaraca/Gemini_Generated_Image_4nk7hh4nk7hh4nk7.png",       key:"bz.tugrali"},
+  {img:"imgkaraca/Gemini_Generated_Image_1jtjdt1jtjdt1jtj.png",       key:"bz.suyolu"},
+  {img:"imgkaraca/Gemini_Generated_Image_33l48233l48233l4.png",       key:"bz.pullu"},
+  {img:"imgkaraca/Gemini_Generated_Image_w41ujfw41ujfw41u.png",       key:"bz.ceyrek"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_2m1o6z2m1o6z2m1o.png",  key:"bz.kelepce"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_b2oxj6b2oxj6b2ox.png",  key:"bz.zincir"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_c69aj5c69aj5c69a.png",  key:"bz.dalgali"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_izjd72izjd72izjd.png",  key:"bz.ajur"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_mwsscwmwsscwmwss.png",  key:"bz.burma"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_okeorpokeorpokeo.png", key:"bz.klasikHalka"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_osqi7yosqi7yosqi.png",  key:"bz.hasirKelepce"},
 ];
 const kolyeItems = [
-  {img:"imgkolye/Gemini_Generated_Image_1s5zws1s5zws1s5z.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_2kmcso2kmcso2kmc.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_3a95u53a95u53a95.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_5p3th35p3th35p3t.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_5yuago5yuago5yua.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_99ql6i99ql6i99ql.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_om87r7om87r7om87.png", label:"22 Ayar Altın Kolye"},
-  {img:"imgkolye/Gemini_Generated_Image_vw74v5vw74v5vw74.png", label:"22 Ayar Altın Kolye"},
+  {img:"imgkolye/Gemini_Generated_Image_1s5zws1s5zws1s5z.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_2kmcso2kmcso2kmc.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_3a95u53a95u53a95.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_5p3th35p3th35p3t.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_5yuago5yuago5yua.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_99ql6i99ql6i99ql.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_om87r7om87r7om87.png", key:"kl.generic"},
+  {img:"imgkolye/Gemini_Generated_Image_vw74v5vw74v5vw74.png", key:"kl.generic"},
 ];
 const yuzukItems = [
-  {img:"yuzukvebilezik/Gemini_Generated_Image_7nwgt07nwgt07nwg.png", label:"Klasik Yüzük Seçkisi"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_ou52jhou52jhou52.png", label:"Tuğralı Yüzük Seçkisi"},
-  {img:"yuzukvebilezik/Gemini_Generated_Image_rh3u08rh3u08rh3u.png", label:"Küpe Koleksiyonu"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_7nwgt07nwgt07nwg.png", key:"yz.klasik"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_ou52jhou52jhou52.png", key:"yz.tugrali"},
+  {img:"yuzukvebilezik/Gemini_Generated_Image_rh3u08rh3u08rh3u.png", key:"yz.kupe"},
 ];
 
 /* Galerileri render et + scroll reveal observer'a kaydet */
@@ -1731,8 +2274,8 @@ function renderGallery(targetId, items, opener){
   el.innerHTML = items.map((it,i)=>{
     const reveal = i%4===0 ? "reveal" : "reveal d"+(i%4);
     return `<div class="kolye-item ${reveal}" onclick="${opener}(${i})">
-      <div class="kolye-img-wrap"><img src="${it.img}" alt="${it.label}" loading="lazy" /></div>
-      <span class="kolye-label">${it.label}</span>
+      <div class="kolye-img-wrap"><img src="${it.img}" alt="" loading="lazy" /></div>
+      <span class="kolye-label" data-i18n="${it.key}"></span>
     </div>`;
   }).join('');
   // Yeni eklenen .reveal elementlerini scroll observer'a kaydet
@@ -1747,26 +2290,29 @@ renderGallery('yuzukGrid',   yuzukItems,   'openYuzukLightbox');
 /* Ziynet altın carousel ===============================================
    Her kart 1+ foto. Kullanıcı kaydırabilir, oklarla geçebilir, otomatik döner. */
 /* zoom: kart içindeki paranın görsel çapını eşitlemek için her altına özel ölçek.
-   Hepsi yaklaşık aynı boyutta görünmeli, kart içinde ferah dursun. */
+   Hepsi yaklaşık aynı boyutta görünmeli, kart içinde ferah dursun.
+   imgs içindeki bir fotoyu obje olarak yazarsan ({src, zoom, offy}) sadece o fotoğraf
+   kendi ölçeğini kullanır — kartın geneli aynı kalır. Bu sayede aynı parayı farklı
+   çerçevelemeyle çekilmiş fotoğraflar da aynı boyutta görünür. */
 const ziynetItems = [
-  {label:"Tam Altın",        meta:"22 Ayar",  zoom:0.78, imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
-  {label:"Yarım Altın",      meta:"22 Ayar",  zoom:0.78, imgs:["ziynet/yarim.avif","ziynet/yarim1.avif","ziynet/yarim2.avif"]},
-  {label:"Çeyrek Altın",     meta:"22 Ayar",  zoom:0.92, imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
-  {label:"Reşat 2,5 Altın",  meta:"22 Ayar",  zoom:0.55, imgs:["ziynet/resat25.avif","ziynet/resat25_1.avif","ziynet/resat25_2.avif"]},
-  {label:"Reşat Tam Altın",  meta:"22 Ayar",  zoom:0.82, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
-  {label:"Gremse Altını",    meta:"22 Ayar",  zoom:0.78, imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
-  {label:"Ata Lirası",       meta:"22 Ayar",  zoom:0.55, imgs:["ziynet/atalira.avif"]},
-  {label:"5'i Bir Yerde",    meta:"22 Ayar",  zoom:0.55, imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
+  {key:"zy.tam",       metaKey:"zy.meta22", zoom:0.78, imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
+  {key:"zy.yarim",     metaKey:"zy.meta22", zoom:0.78, imgs:["ziynet/yarim.avif",{src:"ziynet/yarim1.avif",zoom:1.05},"ziynet/yarim2.avif"]},
+  {key:"zy.ceyrek",    metaKey:"zy.meta22", zoom:0.92, imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
+  {key:"zy.resat25",   metaKey:"zy.meta22", zoom:0.55, imgs:["ziynet/resat25.avif","ziynet/resat25_1.avif","ziynet/resat25_2.avif"]},
+  {key:"zy.resatTam",  metaKey:"zy.meta22", zoom:1.05, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
+  {key:"zy.gremse",    metaKey:"zy.meta22", zoom:0.78, imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
+  {key:"zy.ata",       metaKey:"zy.meta22", zoom:0.55, imgs:["ziynet/atalira.avif"]},
+  {key:"zy.beslibir",  metaKey:"zy.meta22", zoom:0.55, imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
 ];
 
 /* Külçe altın — ortak arka yüz */
 const kulceArka = "kulce/arkakismi.webp";
 const kulceItems = [
-  {label:"5 Gram Külçe",   meta:"999.9 · Metalor", imgs:["kulce/5gram.webp",   kulceArka]},
-  {label:"10 Gram Külçe",  meta:"999.9 · Metalor", imgs:["kulce/10gram.webp",  kulceArka]},
-  {label:"20 Gram Külçe",  meta:"999.9 · Metalor", imgs:["kulce/20gram.webp",  kulceArka]},
-  {label:"50 Gram Külçe",  meta:"999.9 · Metalor", imgs:["kulce/50gram.webp",  kulceArka]},
-  {label:"100 Gram Külçe", meta:"999.9 · Metalor", imgs:["kulce/100gram.webp", kulceArka]},
+  {key:"kc.5",   metaKey:"kc.meta", imgs:["kulce/5gram.webp",   kulceArka]},
+  {key:"kc.10",  metaKey:"kc.meta", imgs:["kulce/10gram.webp",  kulceArka]},
+  {key:"kc.20",  metaKey:"kc.meta", imgs:["kulce/20gram.webp",  kulceArka]},
+  {key:"kc.50",  metaKey:"kc.meta", imgs:["kulce/50gram.webp",  kulceArka]},
+  {key:"kc.100", metaKey:"kc.meta", imgs:["kulce/100gram.webp", kulceArka]},
 ];
 
 /* Carousel'li kart bölümü oluştur (ziynet + külçe için ortak) */
@@ -1777,17 +2323,20 @@ function renderCarouselSection(rootId, items){
   root.innerHTML = items.map((it,i)=>{
     const multi = it.imgs.length > 1;
     const reveal = i%4===0 ? "reveal" : "reveal d"+(i%4);
-    const styleVars = [];
-    if (it.zoom != null) styleVars.push(`--zoom:${it.zoom}`);
-    if (it.offy != null) styleVars.push(`--offy:${it.offy}`);
-    const styleAttr = styleVars.length ? ` style="${styleVars.join(';')}"` : '';
-    const slides = it.imgs.map(src =>
-      `<div class="ziynet-slide"><img src="${src}" alt="${it.label}" loading="lazy"${styleAttr} /></div>`
-    ).join('');
+    const slides = it.imgs.map(entry => {
+      const src  = typeof entry === 'string' ? entry : entry.src;
+      const zoom = (entry && typeof entry === 'object' && entry.zoom != null) ? entry.zoom : it.zoom;
+      const offy = (entry && typeof entry === 'object' && entry.offy != null) ? entry.offy : it.offy;
+      const sv = [];
+      if (zoom != null) sv.push(`--zoom:${zoom}`);
+      if (offy != null) sv.push(`--offy:${offy}`);
+      const styleAttr = sv.length ? ` style="${sv.join(';')}"` : '';
+      return `<div class="ziynet-slide"><img src="${src}" alt="" loading="lazy"${styleAttr} /></div>`;
+    }).join('');
     const dots = multi ? `<div class="ziy-dots">${it.imgs.map((_,j)=>`<span class="${j===0?'on':''}"></span>`).join('')}</div>` : '';
     const arrows = multi ? `
-      <button class="ziy-arrow prev" aria-label="Önceki" type="button">‹</button>
-      <button class="ziy-arrow next" aria-label="Sonraki" type="button">›</button>
+      <button class="ziy-arrow prev" aria-label="‹" type="button">‹</button>
+      <button class="ziy-arrow next" aria-label="›" type="button">›</button>
     ` : '';
     return `<article class="ziynet-card ${reveal}">
       <div class="ziynet-stage" data-multi="${multi}">
@@ -1795,8 +2344,8 @@ function renderCarouselSection(rootId, items){
         ${arrows}${dots}
       </div>
       <div class="ziynet-info">
-        <span class="nm">${it.label}</span>
-        <span class="meta">${it.meta}</span>
+        <span class="nm" data-i18n="${it.key}"></span>
+        <span class="meta" data-i18n="${it.metaKey}"></span>
       </div>
     </article>`;
   }).join('');
@@ -1867,6 +2416,21 @@ function renderCarouselSection(rootId, items){
 
 renderCarouselSection('ziynetGrid', ziynetItems);
 renderCarouselSection('kulceGrid',  kulceItems);
+
+/* I18N init ===========================================================
+   Tüm dinamik içerik render edildikten sonra dili uygula ve butonları bağla. */
+(function initI18n(){
+  let saved = 'fr';
+  try { saved = localStorage.getItem('kg_lang') || 'fr'; } catch(_){}
+  if (!I18N[saved]) saved = 'fr';
+  setLang(saved);
+  document.querySelectorAll('#langSwitch button').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      setLang(btn.dataset.lang);
+    });
+  });
+})();
 
 /* Lightbox ============================================================ */
 const kolyeImgs   = kolyeItems.map(x=>x.img);
