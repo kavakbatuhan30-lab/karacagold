@@ -1012,17 +1012,14 @@
     outline:2px solid var(--gold);outline-offset:3px;border-radius:2px;
   }
 
-  /* Respect reduced-motion globally */
+  /* Respect reduced-motion — only kill heavy decorative effects, keep
+     ambient brand motion (mandala spin, marquee, reveal fade). */
   @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{
-      animation-duration:.001ms !important;
-      animation-iteration-count:1 !important;
-      transition-duration:.001ms !important;
-      scroll-behavior:auto !important;
-    }
-    .hero h1 .line span{transform:none}
-    .hero .eyebrow,.hero p.lede,.hero-cta,.reveal{opacity:1;transform:none}
-    .mandala{animation:none}
+    .sparkles,.sparkle{animation:none !important;display:none}
+    .card .media::after{animation:none !important;display:none}
+    .card.featured{animation:none !important}
+    /* hero girisini snap-in yap */
+    .hero h1 .line span{animation-duration:.6s}
   }
 
   /* ==========================================================================
@@ -2060,7 +2057,7 @@ const wireSVG = (i) => {
 
 const grid = document.getElementById("grid");
 grid.innerHTML = products.map((p,i)=>`
-  <article class="card${p.featured?' featured':''}" data-c="${p.c}">
+  <article class="card${p.featured?' featured':''} reveal${i%4?' d'+(i%4):''}" data-c="${p.c}">
     ${p.tagKey?`<span class="badge" data-i18n="${p.tagKey}"></span>`:""}
     <span class="hint">→</span>
     <div class="media">
