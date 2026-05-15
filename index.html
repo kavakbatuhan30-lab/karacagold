@@ -67,7 +67,7 @@
     text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:500;
   }
   nav .brand img{height:36px;width:36px;border-radius:50%}
-  nav ul{display:flex;gap:32px;list-style:none}
+  nav ul{display:flex;gap:26px;list-style:none}
   nav ul li.mobile-only,nav ul a.mobile-cta{display:none}
   nav ul a{
     color:var(--ink);text-decoration:none;font-size:13px;
@@ -114,7 +114,7 @@
   .burger.open span:nth-child(2){opacity:0}
   .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
-  @media (max-width:900px){
+  @media (max-width:1280px){
     nav.top{padding:18px 22px}
     nav.top.scrolled{padding:12px 22px}
     nav ul{
@@ -142,6 +142,11 @@
     nav .cta{display:none}
     .lang-switch{margin-left:auto;margin-right:14px;padding:3px}
     .lang-switch button{padding:5px 8px;font-size:10px;letter-spacing:.12em}
+  }
+  /* Cok dar ekranlarda lang switcher'i tekrar kucult */
+  @media (max-width:420px){
+    .lang-switch{gap:0;padding:2px}
+    .lang-switch button{padding:5px 6px;font-size:10px;letter-spacing:.08em}
   }
 
   /* Hero ---------------------------------------------------------------- */
