@@ -936,8 +936,8 @@
     font-family:var(--serif);font-size:18px;font-weight:500;color:var(--ink);
   }
   .ziynet-info .meta{
-    font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
-    color:var(--bronze-soft);
+    font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--bronze-soft);white-space:nowrap;
   }
 
   /* Kolye gallery ------------------------------------------------------- */
@@ -1597,6 +1597,14 @@ const I18N = {
     "ziynet.title":"Pièces d'or<br /><em>classiques</em>.",
     "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası et Gremse — pièces de la République turque, originales et certifiées, indépendantes du cours quotidien.",
     "zy.meta22":"22 carats",
+    "zy.meta.ceyrek":"22 carats · 1,75 g",
+    "zy.meta.yarim":"22 carats · 3,5 g",
+    "zy.meta.tam":"22 carats · 7 g",
+    "zy.meta.gremse":"22 carats · 17,5 g",
+    "zy.meta.resatTam":"22 carats · 7,2 g",
+    "zy.meta.resat25":"22 carats · 18 g",
+    "zy.meta.beslibir":"22 carats · 36 g",
+    "zy.meta.ata":"22 carats · 7,2 g",
     "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
     "zy.resat25":"Reşat 2,5","zy.resatTam":"Reşat Tam Altın","zy.gremse":"Gremse",
     "zy.ata":"Ata Lirası","zy.beslibir":"Cinq pièces réunies",
@@ -1700,6 +1708,14 @@ const I18N = {
     "ziynet.title":"Klasik <em>ziynet</em><br />altın paraları.",
     "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası ve Gremse — günlük borsadan bağımsız, sertifikalı orijinal Cumhuriyet altınları.",
     "zy.meta22":"22 Ayar",
+    "zy.meta.ceyrek":"22 Ayar · 1,75 g",
+    "zy.meta.yarim":"22 Ayar · 3,5 g",
+    "zy.meta.tam":"22 Ayar · 7 g",
+    "zy.meta.gremse":"22 Ayar · 17,5 g",
+    "zy.meta.resatTam":"22 Ayar · 7,2 g",
+    "zy.meta.resat25":"22 Ayar · 18 g",
+    "zy.meta.beslibir":"22 Ayar · 36 g",
+    "zy.meta.ata":"22 Ayar · 7,2 g",
     "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
     "zy.resat25":"Reşat 2,5 Altın","zy.resatTam":"Reşat Tam Altın","zy.gremse":"Gremse Altını",
     "zy.ata":"Ata Lirası","zy.beslibir":"5'i Bir Yerde",
@@ -1803,6 +1819,14 @@ const I18N = {
     "ziynet.title":"Klassieke<br /><em>goudmunten</em>.",
     "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası en Gremse — originele en gecertificeerde munten van de Turkse Republiek, onafhankelijk van de dagkoers.",
     "zy.meta22":"22 karaat",
+    "zy.meta.ceyrek":"22 karaat · 1,75 g",
+    "zy.meta.yarim":"22 karaat · 3,5 g",
+    "zy.meta.tam":"22 karaat · 7 g",
+    "zy.meta.gremse":"22 karaat · 17,5 g",
+    "zy.meta.resatTam":"22 karaat · 7,2 g",
+    "zy.meta.resat25":"22 karaat · 18 g",
+    "zy.meta.beslibir":"22 karaat · 36 g",
+    "zy.meta.ata":"22 karaat · 7,2 g",
     "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
     "zy.resat25":"Reşat 2,5","zy.resatTam":"Reşat Tam Altın","zy.gremse":"Gremse",
     "zy.ata":"Ata Lirası","zy.beslibir":"Vijf munten samen",
@@ -1906,6 +1930,14 @@ const I18N = {
     "ziynet.title":"Classic<br /><em>gold coins</em>.",
     "ziynet.p":"Tam Altın, Yarım, Çeyrek, Reşat, Ata Lirası and Gremse — original, certified Turkish Republic coins, independent of the daily exchange rate.",
     "zy.meta22":"22 carat",
+    "zy.meta.ceyrek":"22 carat · 1.75 g",
+    "zy.meta.yarim":"22 carat · 3.5 g",
+    "zy.meta.tam":"22 carat · 7 g",
+    "zy.meta.gremse":"22 carat · 17.5 g",
+    "zy.meta.resatTam":"22 carat · 7.2 g",
+    "zy.meta.resat25":"22 carat · 18 g",
+    "zy.meta.beslibir":"22 carat · 36 g",
+    "zy.meta.ata":"22 carat · 7.2 g",
     "zy.tam":"Tam Altın","zy.yarim":"Yarım Altın","zy.ceyrek":"Çeyrek Altın",
     "zy.resat25":"Reşat 2.5","zy.resatTam":"Reşat Full Altın","zy.gremse":"Gremse",
     "zy.ata":"Ata Lirası","zy.beslibir":"Five Coins Together",
@@ -2297,14 +2329,16 @@ renderGallery('yuzukGrid',   yuzukItems,   'openYuzukLightbox');
    kendi ölçeğini kullanır — kartın geneli aynı kalır. Bu sayede aynı parayı farklı
    çerçevelemeyle çekilmiş fotoğraflar da aynı boyutta görünür. */
 const ziynetItems = [
-  {key:"zy.tam",       metaKey:"zy.meta22", zoom:0.78, imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
-  {key:"zy.yarim",     metaKey:"zy.meta22", zoom:0.78, imgs:["ziynet/yarim.avif",{src:"ziynet/yarim1.avif",zoom:1.05},"ziynet/yarim2.avif"]},
-  {key:"zy.ceyrek",    metaKey:"zy.meta22", zoom:0.92, imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
-  {key:"zy.resat25",   metaKey:"zy.meta22", zoom:0.55, imgs:["ziynet/resat25.avif","ziynet/resat25_1.avif","ziynet/resat25_2.avif"]},
-  {key:"zy.resatTam",  metaKey:"zy.meta22", zoom:1.05, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
-  {key:"zy.gremse",    metaKey:"zy.meta22", zoom:0.78, imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
-  {key:"zy.ata",       metaKey:"zy.meta22", zoom:0.55, imgs:["ziynet/atalira.avif"]},
-  {key:"zy.beslibir",  metaKey:"zy.meta22", zoom:0.55, imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
+  // Sirali: kucukten buyuge gram bazli. Resat Tam Altin'in fotolari resat25 + beslibir'de de.
+  // Ata Lirasi eski 5ibiryerde fotolarini kullaniyor.
+  {key:"zy.ceyrek",    metaKey:"zy.meta.ceyrek",   zoom:0.92, imgs:["ziynet/ceyrek.avif","ziynet/ceyrek1.avif","ziynet/ceyrek2.avif"]},
+  {key:"zy.yarim",     metaKey:"zy.meta.yarim",    zoom:0.78, imgs:["ziynet/yarim.avif",{src:"ziynet/yarim1.avif",zoom:1.05},"ziynet/yarim2.avif"]},
+  {key:"zy.tam",       metaKey:"zy.meta.tam",      zoom:0.78, imgs:["ziynet/tamaltin.avif","ziynet/tamaltin1.avif","ziynet/tamaltin2.avif"]},
+  {key:"zy.gremse",    metaKey:"zy.meta.gremse",   zoom:0.78, imgs:["ziynet/gremse.jpg","ziynet/gremse1.jpg"]},
+  {key:"zy.resatTam",  metaKey:"zy.meta.resatTam", zoom:1.05, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
+  {key:"zy.resat25",   metaKey:"zy.meta.resat25",  zoom:1.05, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
+  {key:"zy.beslibir",  metaKey:"zy.meta.beslibir", zoom:1.05, imgs:["ziynet/resattamaltin.jpg","ziynet/resattamaltin1.jpg"]},
+  {key:"zy.ata",       metaKey:"zy.meta.ata",      zoom:0.55, imgs:["ziynet/5ibiryerde.avif","ziynet/5ibiryerde1.avif","ziynet/5ibiryerde2.avif"]},
 ];
 
 /* Külçe altın — ortak arka yüz */
